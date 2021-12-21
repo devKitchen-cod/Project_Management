@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux'
 
 export default function Tasks(){
 
-  const dispatch = useDispatch();
- // useEffect(() =>{dispatch()}, [])
+  
+ 
 
   return(
     <div>
@@ -16,7 +16,7 @@ export default function Tasks(){
     <tr>
       <th>#</th>
       <th>Task Name</th>
-      <th>Developer</th>
+      <th>chtotot</th>
       <th>Time for task</th>
       
     </tr>
@@ -27,7 +27,7 @@ export default function Tasks(){
       <td>1</td>
       <td>Task 1</td>
       <td>Otto</td>
-      <td>12    <Button>Some</Button></td>
+      <td>12    <Button>Added</Button></td>
     </tr>
     <tr>
       <td>2</td>
