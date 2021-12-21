@@ -19,6 +19,10 @@ import Story from './Pages/Story';
 import Tracker from './Pages/Tracker';
 import GuardedRoute from './Utils/GuardPro';
 
+
+
+
+
 export default function Nav(){
   const item = useSelector((state) => state.enter)
   return (
@@ -27,7 +31,7 @@ export default function Nav(){
         {/* <GuardedRoute path = '/' component = {} auth = {item}/>    */}
         <GuardedRoute path = '/editTask'   component = {EditTask} auth = {item}/>   
         <GuardedRoute path = '/createTask' component = {CreateTask} auth = {item}/>   
-
+{console.log("hello")}
         <GuardedRoute path = '/vue_project' component = {Vue_Project} auth = {item}/>  
         <GuardedRoute path = '/story'   component = {Story}   auth = {item}/>  
         <GuardedRoute path = '/create'  component = {Create}   auth = {item}/>  
