@@ -27,7 +27,7 @@ module.exports.createUser = async function(req, res){
   }
 
 
-  asdasd
+
   const VerifyEmail = async (req, res) => {
     const result = req 
     console.log(result)
