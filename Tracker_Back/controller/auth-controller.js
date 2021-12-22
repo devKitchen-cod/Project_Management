@@ -15,7 +15,7 @@ module.exports.createUser = async function(req, res){
       
       if(verify_email === false){
         
-        db.query(`INSERT INTO "users" (name, user_email, user_password, role) values ($1, $2, $3, $4)`, [newPerson.name, newPerson.email, newPerson.password, newPerson.role])
+        db.query(`INSERT INTO "Users_Table" (name_user, email_user, password_user, role_user) values ($1, $2, $3, $4)`, [newPerson.name, newPerson.email, newPerson.password, newPerson.role])
         const token = jwt.sign({email: newPerson.email, password: newPerson.password}, keys.jwt, {expiresIn: 60 * 60 }) //create token
         res.status(200).json({token: token}) 
 
@@ -31,7 +31,7 @@ module.exports.createUser = async function(req, res){
   const VerifyEmail = async (req, res) => {
     const result = req 
     console.log(result)
-    let checked_email =await (db.query(`SELECT user_email FROM "users" WHERE user_email = $1;`, [result]));
+    let checked_email =await (db.query(`SELECT email_user FROM "Users_Table" WHERE email_user = $1;`, [result]));
     if((await checked_email).rowCount === 0) {return false}
     return true
   }
@@ -52,7 +52,7 @@ module.exports.createUser = async function(req, res){
 
   CheckToken = async function(req,res){
     const request = req
-    let check = (client.query(`SELECT user_email, user_password FROM "users"  WHERE user_email = $1 AND user_password = $2;`, [request.email, request.password]))
+    let check = (client.query(`SELECT email_user, password_user FROM "Users_Table"  WHERE email_user = $1 AND password_user = $2;`, [request.email, request.password]))
     if((await request).rowCount==0)return false
     return true
   }
