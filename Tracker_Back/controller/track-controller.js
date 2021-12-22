@@ -3,7 +3,7 @@ const db = require('../DataBase/db')
 module.exports.createProject = async function(req, res){
   let newProject = {name: req.body.name, user:req.body.user}
   try{
-    db.query(`INSERT INTO "Tracker_Projects" ("Name_of_Project", "user") values ($1, $2)`, [newProject.name, newProject.user])
+    db.query(`INSERT INTO "Projects_Table" ("name_project", "owner_project") values ($1, $2)`, [newProject.name, newProject.user])
     console.log(newProject.name)
     console.log(newProject.user)
 
@@ -21,7 +21,7 @@ module.exports.trackContrl = async function(req, res){
   console.log("Stop time of project " + Tracking.nameProject + '  ==  ' + Tracking.stopTime)
 
   try{
-    db.query(`UPDATE "Tracker_Projects" SET "qurent_time" =  $1, "start_time" = $3, "stop_time" = $4 WHERE "Name_of_Project"= $2 `, [Tracking.workTime, Tracking.nameProject, Tracking.startTime, Tracking.stopTime])
+    db.query(`UPDATE "Projects_Table" SET "current_time" =  $1, "start_time" = $3, "stop_time" = $4 WHERE "Projects_Table"= $2 `, [Tracking.workTime, Tracking.nameProject, Tracking.startTime, Tracking.stopTime])
   
   }catch (err) {
     console.log(err);
