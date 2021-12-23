@@ -10,23 +10,16 @@ module.exports.createProject = async function(req, res){
   }catch (err) {
       console.log(err);
     }
-
-
 }
 module.exports.trackContrl = async function(req, res){
-  let Tracking = {nameProject:req.body.name_project, workTime: req.body.work_time  }
-  
-  
+  let Tracking = {nameProject:req.body.nameProject, workTime: req.body.workTime}
+    
   console.log("Work time of project " + Tracking.nameProject + '  ==  ' + Tracking.workTime)
 
-
   try{
-    db.query(`UPDATE "Projects_Table" SET "current_time" =  $1 WHERE "Projects_Table"= $2 `, [Tracking.workTime, Tracking.nameProject])
+    db.query(`UPDATE "Projects_Table" SET "current_time" =  $1 WHERE "name_project"= $2 `, [Tracking.workTime, Tracking.nameProject])
   
   }catch (err) {
     console.log(err);
-  }
-
-
-  
+  }  
 }

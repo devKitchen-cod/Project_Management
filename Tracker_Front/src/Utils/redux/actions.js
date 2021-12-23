@@ -78,6 +78,23 @@ export const reqcreate = (obj) => {
       )}
     }
 
+    export const reqsettimeproject = (obj) => {
+      return (dispatch) => {
+          axios({
+            method: "POST",
+            url: "http://localhost:8080/api/tracker",
+            data: {
+              nameProject: obj.nameProject,     
+              workTime  : obj.workTime
+            }
+           })
+           .then (
+             dispatch(success_create()),
+             (err) => dispatch(err_create(err))
+          )}
+        }
+
+
     export const notcreate = () => {
       return(dispatch) => {
         dispatch(err_create())
