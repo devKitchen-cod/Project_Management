@@ -14,14 +14,14 @@ module.exports.createProject = async function(req, res){
 
 }
 module.exports.trackContrl = async function(req, res){
-  let Tracking = {nameProject:req.body.name_project, startTime: req.body.start_time, workTime: req.body.work_time, stopTime: req.body.stop_time  }
+  let Tracking = {nameProject:req.body.name_project, workTime: req.body.work_time  }
   
-  console.log("Start time of project " + Tracking.nameProject + '  ==  ' + Tracking.startTime)
+  
   console.log("Work time of project " + Tracking.nameProject + '  ==  ' + Tracking.workTime)
-  console.log("Stop time of project " + Tracking.nameProject + '  ==  ' + Tracking.stopTime)
+
 
   try{
-    db.query(`UPDATE "Projects_Table" SET "current_time" =  $1, "start_time" = $3, "stop_time" = $4 WHERE "Projects_Table"= $2 `, [Tracking.workTime, Tracking.nameProject, Tracking.startTime, Tracking.stopTime])
+    db.query(`UPDATE "Projects_Table" SET "current_time" =  $1 WHERE "Projects_Table"= $2 `, [Tracking.workTime, Tracking.nameProject])
   
   }catch (err) {
     console.log(err);
