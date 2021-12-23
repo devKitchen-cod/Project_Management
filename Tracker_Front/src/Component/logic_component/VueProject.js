@@ -54,22 +54,17 @@ function Vue_Project(){
         handleClose()
       }        
     }
-
-
     const [show, setShow] = useState(false)
     const handleClose = _event => {
       setShow(false)
       setNameTask('')
       setTextTask('')
-      setTimeTask('')
-      
-      
+      setTimeTask('') 
     } 
     const handleShow = _event =>{
       setShow(true)
       dispatch(reqGetAllUsers(), [])
     } 
-
 
   return(
   <div><NavBarF/>
@@ -103,14 +98,16 @@ function Vue_Project(){
             </Form.Group>
            
             Project
-            <Form.Select onChange = {e => dispatch({type: SETPROJECTFORTASK, payload: e.target.value})}>{nameProject.map((item) => (
-              <option value = {item.Name_of_Project}>{item.Name_of_Project}</option>
+            <Form.Select defaultValue = 'Choose Project' onChange = {e => dispatch({type: SETPROJECTFORTASK, payload: e.target.value})}>
+              <option disabled>Choose Project</option>   
+              {nameProject.map((item) => (
+              <option value = {item.name_project}>{item.name_project}</option>
             ))} </Form.Select>
 
            Users
-           <Form.Select>{users.map((item) => (
-             <option value ={item.name}>{item.name}</option>
-           ))}</Form.Select>
+           <Form.Select defaultValue = 'Choose User'>
+           <option disabled>Choose User</option>
+             {users.map((item) => (<option value ={item.name_user}>{item.name_user}</option>))}</Form.Select>
            </ModalBody>
 
 

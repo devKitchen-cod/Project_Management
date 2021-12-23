@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GETUSERS, SETNAMETASK, SETPROJECT } from './redux-types'
+import { GETUSERS, READTASK, SETNAMETASK, SETPROJECT } from './redux-types'
 
 const start_login = () => {
   return {type: 'start_req'}
@@ -62,21 +62,21 @@ export const reqauth = (obj) => {
   }  
 }
 
-export const reqcreate = (obj) => {
-  return (dispatch) => {
-      axios({
-        method: "POST",
-        url: "http://localhost:8080/api/project",
-        data: {
-          name: obj.name_of_project,
-          user: obj.email  
+    export const reqcreate = (obj) => {
+      return (dispatch) => {
+          axios({
+            method: "POST",
+            url: "http://localhost:8080/api/project",
+            data: {
+              name: obj.name_of_project,
+              user: obj.email  
+            }
+          })
+          .then (
+            dispatch(success_create()),
+            (err) => dispatch(err_create(err))
+          )}
         }
-       })
-       .then (
-         dispatch(success_create()),
-         (err) => dispatch(err_create(err))
-      )}
-    }
 
     export const reqsettimeproject = (obj) => {
       return (dispatch) => {
@@ -94,25 +94,24 @@ export const reqcreate = (obj) => {
           )}
         }
 
-
     export const notcreate = () => {
       return(dispatch) => {
         dispatch(err_create())
       }
     }
 
-export const reqsetproject = (obj) => {
-  return (dispatch) => {
-    axios({
-      method: "POST",
-      url: "http://localhost:8080/api/allproj",
-      data: {email: obj.email}
-    })
-    .then((res) => {
-      dispatch({type: SETPROJECT, payload: res.data})
-    }) 
-  }
-}
+    export const reqsetproject = (obj) => {
+      return (dispatch) => {
+        axios({
+          method: "POST",
+          url: "http://localhost:8080/api/allproj",
+          data: {email: obj.email}
+        })
+        .then((res) => {
+          dispatch({type: SETPROJECT, payload: res.data})
+        }) 
+      }
+    }
 
 export const reqcreatetask = (obj) => {
   return(dispatch) => {
@@ -142,8 +141,14 @@ export const reqGetAllUsers = () =>{
 }
 
 
-// export const reqreadtask = (obj) => {
-//   return (dispatch) => {
-    
-//   }
-// }
+export const reqreadtask = () => {
+  return (dispatch) => {
+      axios({
+        method: "POST",
+        url: "http://localhost:8080/api/task-read",
+      })
+      .then((res) => {
+        dispatch({type: READTASK, payload: res.data})
+      })
+  }
+}

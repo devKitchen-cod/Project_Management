@@ -63,7 +63,6 @@ export default function TrackerF(){
     setTime({ms:0, s:0, m:0, h:0})
   };  
   const resume = () => start()
-
   useEffect(() => {dispatch(reqsetproject(obj))}, [])
 
   return (

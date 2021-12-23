@@ -1,4 +1,4 @@
-import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME  } from "./redux-types";
+import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK  } from "./redux-types";
 import { combineReducers } from "redux"
 
 const init = {
@@ -65,6 +65,7 @@ const init_task = {
   nameProject: '',
   allUsers: [],
   selectedProject: '',
+  readedTask: [],
 }
 function setTask(state = init_task, action){
   switch(action.type){
@@ -82,6 +83,9 @@ function setTask(state = init_task, action){
     }
     case SETPROJECTFORTASK:{
       return{...state, selectedProject: action.payload}
+    }
+    case READTASK:{
+      return {...state, readedTask: action.payload}
     }
     default: return state
   }

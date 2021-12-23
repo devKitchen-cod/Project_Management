@@ -12,7 +12,7 @@ module.exports.createTask = async function(req, res){
   console.log('Task CREATING')
 
   try {
-    db.query(`INSERT INTO "Task_table" ("name_of_task", "time_for_task", "description_of_task") values ($1, $2, $3)`,
+    db.query(`INSERT INTO "Tasks_Table" ("name_task", "time_task", "description_task") values ($1, $2, $3)`,
      [newTask.name_of_task, newTask.time_for_task, newTask.descripton_of_task]) 
   } catch (error) {
     console.log(error)
@@ -21,7 +21,7 @@ module.exports.createTask = async function(req, res){
 
 module.exports.readTask = async function(req, res){
   
-  let result_of_request = await db.query(`SELECT "name_of_task", "user", "time_for_task" FROM "Task_table"`)
+  let result_of_request = await db.query(`SELECT "name_task", "description_task", "time_task" FROM "Tasks_Table"`)
 
   console.log(result_of_request.rows)
   res.send(result_of_request.rows)

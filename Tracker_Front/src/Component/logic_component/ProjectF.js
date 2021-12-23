@@ -22,9 +22,9 @@ export default function ProjectF(){
     <div>
       {projects.map((item) =>(
     <Card style ={{ margin: "100px", marginLeft:"300px", marginRight: "300px", color: ''}} bg="white">
-      <Card.Header as="h5">{item.Name_of_Project}</Card.Header>
+      <Card.Header as="h5">{item.name_project}</Card.Header>
       <Card.Body>
-        <Card.Title>TIME: {item.qurent_time}</Card.Title>
+        <Card.Title>TIME: {item.current_time}</Card.Title>
  
         <Card.Text>
           Description of Project

@@ -10,7 +10,7 @@ module.exports.getProject = async function (req, res){
 }
 module.exports.getUsers = async function (req, res){
     const role = 1
-    let users = await db.query(`select "user_email", "name" from "users" ` )
+    let users = await db.query(`select "email_user", "name_user" from "Users_Table" ` )
     console.log('users===', users.rows)
     res.send(users.rows)
   }
