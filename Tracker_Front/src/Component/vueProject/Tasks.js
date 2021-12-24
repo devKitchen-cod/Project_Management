@@ -2,12 +2,22 @@
 import React, { useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import {reqreadtask} from '../../Utils/redux/actions'
+import { reqreadtask } from '../../Utils/redux/actions'
+
 
 export default function Tasks(){
   const dispatch = useDispatch()
-  dispatch(reqreadtask())
+
+  //const selectedUser = useSelector((state) => state.setTask.selectedUser)
+  //console.log(selectedUser)
+  
+ 
+  useEffect(() => {
+    dispatch(reqreadtask())
+  }, [])
+
   const readed_tasks = useSelector((state) => state.setTask.readedTask)
+
   return(
     <div>
  
@@ -34,10 +44,6 @@ export default function Tasks(){
   </tbody>
 
   ))}
-
-
-
-  
 
 </Table>
 

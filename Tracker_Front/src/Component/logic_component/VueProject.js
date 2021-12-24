@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Button, Dropdown, DropdownButton, Form, Modal, ModalBody, ModalDialog, ModalFooter, Tab, Tabs } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK } from '../../Utils/redux/redux-types'
+import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETUSERTASK } from '../../Utils/redux/redux-types'
  import NavBarF from '../NavBarForAuth'
 import Developers from '../vueProject/Developers'
 import Tasks from '../vueProject/Tasks'
-import {reqcreatetask, reqGetAllUsers} from '../../Utils/redux/actions'
+import {reqcreatetask, reqGetAllUsers, reqreadtask} from '../../Utils/redux/actions'
 
 const mapDispatchToProps = {
   reqcreatetask
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 };
 
 function Vue_Project(){  
-    // const history = useHistory()
+    
     const dispatch = useDispatch()
     const state = useSelector((state) => state)
 
@@ -45,14 +45,22 @@ function Vue_Project(){
     const selectednameproj = useSelector((state) => state.setTask.selectedProject)
     console.log(selectednameproj)
 
-    const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1}
+    const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1  }
     const handleDispatch = _event => {
       if(obj.nameTask, obj.timeTask, obj.textTask === ''){
         alert('fild form');
       }else{
         dispatch(reqcreatetask(obj))  
+      
         handleClose()
+        handle_bool()
       }        
+    }
+
+    const handle_bool = _event => {
+      console.log('reeeeaaad')
+      // alert('lolo')
+      dispatch(reqreadtask())
     }
     const [show, setShow] = useState(false)
     const handleClose = _event => {
@@ -105,7 +113,7 @@ function Vue_Project(){
             ))} </Form.Select>
 
            Users
-           <Form.Select defaultValue = 'Choose User'>
+           <Form.Select defaultValue = 'Choose User' onChange = {e => dispatch({type: SETUSERTASK, payload: e.target.value})}>
            <option disabled>Choose User</option>
              {users.map((item) => (<option value ={item.name_user}>{item.name_user}</option>))}</Form.Select>
            </ModalBody>
@@ -121,7 +129,7 @@ function Vue_Project(){
           <Button variant="primary" disabled = {isDisable} onClick={handleDispatch} >
             Confirm
           </Button>
-        </ModalFooter>
+        </ModalFooter>  
 
       </Modal>
       </div>
@@ -132,9 +140,11 @@ function Vue_Project(){
     </div>
     <div style = {{marginLeft:"300px", marginRight:"300px"}}> 
     <Tabs style = {{textAlign: 'center'}} defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
+      
       <Tab eventKey="home" title="Tasks">
          <Tasks/>
       </Tab>
+
    <Tab eventKey="profile" title="Developers">
       <Developers/>
    </Tab>
