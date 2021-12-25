@@ -20,9 +20,9 @@ const success_create = () =>{
 const err_create = () => {
   return {type: 'err_create'}
 }
-const setpro =() => {
-  return {type: SETPROJECT}
-}
+// const setpro =() => {
+//   return {type: SETPROJECT}
+// }
 
 export const reqlogin = (obj) => {
   return(dispatch) => {
@@ -118,7 +118,7 @@ export const reqcreatetask = (obj) => {
     axios({
       method: "POST",
       url: "http://localhost:8080/api/task-create",
-      data: {name_of_task: obj.nameTask, time_for_task: obj.timeTask, descripton_of_task: obj.textTask}
+      data: {name_of_task: obj.nameTask, time_for_task: obj.timeTask, descripton_of_task: obj.textTask, project_task: obj.project_task, user_task: obj.user_task }
     })
     .then(
       dispatch(success_create()),

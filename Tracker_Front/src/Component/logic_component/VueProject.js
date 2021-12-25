@@ -43,9 +43,9 @@ function Vue_Project(){
     const nameProject = useSelector((state) => state.setProject.list_of_projects)
     const users = useSelector((state) => state.setTask.allUsers)
     const selectednameproj = useSelector((state) => state.setTask.selectedProject)
-    console.log(selectednameproj)
+    const selectedusertask = useSelector((state) => state.setTask.selectedUser)
 
-    const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1  }
+    const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1, project_task: selectednameproj, user_task: selectedusertask}
     const handleDispatch = _event => {
       if(obj.nameTask, obj.timeTask, obj.textTask === ''){
         alert('fild form');
@@ -57,9 +57,13 @@ function Vue_Project(){
       }        
     }
 
+
+
+
+    
     const handle_bool = _event => {
       console.log('reeeeaaad')
-      // alert('lolo')
+      alert('Created !')
       dispatch(reqreadtask())
     }
     const [show, setShow] = useState(false)
@@ -77,12 +81,13 @@ function Vue_Project(){
   return(
   <div><NavBarF/>
     <div style = {{textAlign: 'center'}}>
-      <div className = 'editButton' style = {{display:'inline' }}> <Button >Edit Task</Button></div>
+      <div className = 'editButton' style = {{display:'inline' }}><Button >Edit Task</Button></div>
       <div className = 'createButton' style = {{display:'inline', padding: '10px'}}>
       
        <Button onClick = {handleShow}>Create Task</Button>
       
-      <Modal show = {show} onHide = {handleClose}>
+      <Modal show = {show} onHide = {handleClose} backdrop="static"
+        keyboard={false}>
 
 
         <Modal.Header closeButton>

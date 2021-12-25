@@ -25,12 +25,9 @@ export default function ProjectF(){
       <Card.Header as="h5">{item.name_project}</Card.Header>
       <Card.Body>
         <Card.Title>TIME: {item.current_time}</Card.Title>
- 
         <Card.Text>
           Description of Project
-       
         </Card.Text>  
-        
         <Button onClick = {handle_vue}>View Project</Button>
         
         
