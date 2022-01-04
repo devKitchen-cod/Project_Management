@@ -36,7 +36,7 @@ export default function TrackerF(){
     setStatus(1);
     setInterv(setInterval(run, 10));
     const start_time = new Date()
-    setDatastart(start_time)
+    setDatastart(start_time) 
   };
 
   
@@ -61,7 +61,7 @@ export default function TrackerF(){
     setStatus(2);
 
     const stop_time = new Date()
-    const work =stop_time - data_of_start
+    const work = stop_time - data_of_start
     const work1 = work / 1000
     const obj = {nameProject: name, workTime: work1}
     dispatch(reqsettimeproject(obj))

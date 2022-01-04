@@ -1,9 +1,10 @@
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Button, Card} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { reqsetproject } from '../../Utils/redux/actions';
+import { SETIDPRO } from '../../Utils/redux/redux-types';
 
 
 export default function ProjectF(){
@@ -12,9 +13,12 @@ export default function ProjectF(){
   const email = useSelector((state) => state.setAuth.email)
   const obj = {email: email}
   const projects = useSelector((state) => state.setProject.list_of_projects)
-  useEffect(() => {dispatch(reqsetproject(obj))}, [])
   
-  const handle_vue  = _event => {
+  useEffect(() => {dispatch(reqsetproject(obj))}, [])
+
+  const handle_vue  = (id) => {
+    console.log(id)
+    dispatch({type: SETIDPRO, payload: id})
     history.push('/vue_project')
   }
 
@@ -25,12 +29,13 @@ export default function ProjectF(){
       <Card.Header as="h5">{item.name_project}</Card.Header>
       <Card.Body>
         <Card.Title>TIME: {item.current_time}</Card.Title>
+        
         <Card.Text>
           Description of Project
         </Card.Text>  
-        <Button onClick = {handle_vue}>View Project</Button>
-        
-        
+
+        <Button onClick = {() => handle_vue(item.id)}>View Project</Button>
+
       </Card.Body>
     </Card>
     ))

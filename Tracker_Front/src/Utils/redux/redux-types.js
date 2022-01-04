@@ -22,3 +22,5 @@ export const SETTEXTTASK = 'SETTEXTTASK'
 
 export const READTASK = 'READTASK'
 export const DELETETASK = 'DELETETASK'
+
+export const SETIDPRO = 'SETIDPRO'

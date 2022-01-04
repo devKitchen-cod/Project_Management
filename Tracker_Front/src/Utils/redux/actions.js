@@ -42,7 +42,6 @@ export const reqlogin = (obj) => {
   }
 }
 
-
 export const reqauth = (obj) => {
   return (dispatch) => {
     dispatch(start_login());
@@ -62,7 +61,7 @@ export const reqauth = (obj) => {
   }  
 }
 
-    export const reqcreate = (obj) => {
+export const reqcreate = (obj) => {
       return (dispatch) => {
           axios({
             method: "POST",
@@ -76,9 +75,9 @@ export const reqauth = (obj) => {
             dispatch(success_create()),
             (err) => dispatch(err_create(err))
           )}
-        }
+}
 
-    export const reqsettimeproject = (obj) => {
+export const reqsettimeproject = (obj) => {
       return (dispatch) => {
           axios({
             method: "POST",
@@ -92,15 +91,15 @@ export const reqauth = (obj) => {
              dispatch(success_create()),
              (err) => dispatch(err_create(err))
           )}
-        }
+}
 
-    export const notcreate = () => {
+export const notcreate = () => {
       return(dispatch) => {
         dispatch(err_create())
       }
-    }
+}
 
-    export const reqsetproject = (obj) => {
+export const reqsetproject = (obj) => {
       return (dispatch) => {
         axios({
           method: "POST",
@@ -111,7 +110,7 @@ export const reqauth = (obj) => {
           dispatch({type: SETPROJECT, payload: res.data})
         }) 
       }
-    }
+}
 
 export const reqcreatetask = (obj) => {
   return(dispatch) => {
@@ -141,14 +140,16 @@ export const reqGetAllUsers = () =>{
 }
 
 
-export const reqreadtask = () => {
+export const reqreadtask = (obj) => {
   return (dispatch) => {
       axios({
         method: "POST",
         url: "http://localhost:8080/api/task-read",
+        data: {id: obj.idproj}
       })
       .then((res) => {
         dispatch({type: READTASK, payload: res.data})
       })
   }
 }
+

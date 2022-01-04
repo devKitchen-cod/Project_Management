@@ -10,7 +10,6 @@ module.exports.createTask = async function(req, res){
     
   }
   console.log('Task CREATING')
-
   try {
     db.query(`INSERT INTO "Tasks_Table" ("name_task", "planned_time_task", "description_task", "project_task", "user_task") values ($1, $2, $3, $4, $5)`,
      [newTask.name_of_task, newTask.time_for_task, newTask.descripton_of_task, newTask.project_task, newTask.user_task]) 
@@ -21,6 +20,9 @@ module.exports.createTask = async function(req, res){
 
 module.exports.readTask = async function(req, res){
   
+  let newdata = {id: req.body.idproj}
+  console.log("request data id ===", newdata.id)
+
   let result_of_request = await db.query(`SELECT "id", "name_task", "description_task", "planned_time_task", "project_task", "user_task" FROM "Tasks_Table"`)
 
   console.log(result_of_request.rows)

@@ -7,9 +7,16 @@ import { reqreadtask } from '../../Utils/redux/actions'
 
 export default function Tasks(){
   const dispatch = useDispatch()
- 
+
+  const idproj = useSelector((state) => state.setTask.idforproj)
+  console.log("id in Tasks", idproj)
+  const obj = {id: idproj}
+  console.log("obj", obj)
+  
   useEffect(() => {
-    dispatch(reqreadtask())
+
+    dispatch(reqreadtask(obj))
+
   }, [])
 
   const readed_tasks = useSelector((state) => state.setTask.readedTask)
