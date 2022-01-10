@@ -20,12 +20,16 @@ module.exports.createTask = async function(req, res){
 
 module.exports.readTask = async function(req, res){
   
-  let newdata = {id: req.body.idproj}
-  console.log("request data id ===", newdata.id)
+   let newdata = {id: req.body.id}
+   console.log(" request data id === ", newdata.id)
+   let result_of_request = ''
+  try{
+    result_of_request = await db.query(`SELECT "id", "name_task", "description_task", "planned_time_task", "project_task", "user_task" FROM "Tasks_Table" WHERE "project_task" = $1`, [newdata.id])
+    
+  
+  }catch(error){console.error();}
 
-  let result_of_request = await db.query(`SELECT "id", "name_task", "description_task", "planned_time_task", "project_task", "user_task" FROM "Tasks_Table"`)
-
-  console.log(result_of_request.rows)
+  console.log("result == ",result_of_request.rows)
   res.send(result_of_request.rows)
 }
 

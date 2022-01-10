@@ -34,7 +34,7 @@ export default function ProjectF(){
           Description of Project
         </Card.Text>  
 
-        <Button onClick = {() => handle_vue(item.id)}>View Project</Button>
+        <Button onClick = {() => handle_vue(item.name_project)}>View Project</Button>
 
       </Card.Body>
     </Card>

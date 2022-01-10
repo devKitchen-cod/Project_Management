@@ -140,12 +140,12 @@ export const reqGetAllUsers = () =>{
 }
 
 
-export const reqreadtask = (obj) => {
+export const reqreadtask = (idproj) => {
   return (dispatch) => {
       axios({
         method: "POST",
         url: "http://localhost:8080/api/task-read",
-        data: {id: obj.idproj}
+       data: {id: idproj}
       })
       .then((res) => {
         dispatch({type: READTASK, payload: res.data})

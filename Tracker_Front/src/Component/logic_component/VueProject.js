@@ -47,7 +47,7 @@ function Vue_Project(){
     const users = useSelector((state) => state.setTask.allUsers)
     const selectednameproj = useSelector((state) => state.setTask.selectedProject)
     const selectedusertask = useSelector((state) => state.setTask.selectedUser)
-
+    
     const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1, project_task: selectednameproj, user_task: selectedusertask}
     
     const handleDispatch = _event => {
