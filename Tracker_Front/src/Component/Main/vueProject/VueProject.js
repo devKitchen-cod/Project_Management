@@ -3,9 +3,9 @@ import { Button, Dropdown, DropdownButton, Form, Modal, ModalBody, ModalDialog, 
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETUSERTASK } from '../../Utils/redux/redux-types'
- import NavBarF from '../NavBarForAuth'
-import Developers from '../vueProject/Developers'
-import Tasks from '../vueProject/Tasks'
+ import NavBarF from '../Header/NavBarForAuth'
+import Developers from './Developers'
+import Tasks from './Tasks'
 import {reqcreatetask, reqGetAllUsers, reqreadtask} from '../../Utils/redux/actions'
 
 const mapDispatchToProps = {

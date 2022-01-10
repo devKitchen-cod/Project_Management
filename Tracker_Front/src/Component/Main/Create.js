@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 
 import { SETNAMEOFPROJECT } from '../../Utils/redux/redux-types';
 import { notcreate, reqcreate } from '../../Utils/redux/actions';
+import NavBarF from '../Header/NavBarForAuth';
 
 const mapDispatchToProps = {
   reqcreate,
@@ -15,7 +16,7 @@ const mapStateToProps = (state) => {
   }
 };
 
- function CreateF(){
+ function Create(){
   const dispatch = useDispatch()
   const history = useHistory();
   const state = useSelector((state) => state)
@@ -43,6 +44,7 @@ const mapStateToProps = (state) => {
 
   return (
     <div>
+      <NavBarF/>
       <div style ={{textAlign: 'center'}}>Create new project</div>
          <div style = {{marginLeft: '600px', marginRight: '600px', marginTop: '100px' }}>
              <Form.Group onChange = {e => dispatch({type:SETNAMEOFPROJECT, payload: e.target.value})}>
@@ -57,4 +59,4 @@ const mapStateToProps = (state) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateF);
+export default connect(mapStateToProps, mapDispatchToProps)(Create);

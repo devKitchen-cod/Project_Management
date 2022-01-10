@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 
 import { LOGIN, SETEMAIL, SETNAME, SETPASSWORD } from '../../Utils/redux/redux-types';
 import { reqauth } from '../../Utils/redux/actions';
+import NavBar from '../Header/NavBar';
 
 const mapDispatchToProps = {
   reqauth,
@@ -14,7 +15,7 @@ const mapStateToProps = (state) => {
     store: state.reducer.success
   }
 };
-function AuthF(){
+function Auth(){
   const dispatch = useDispatch()
   const history = useHistory();
   const state = useSelector((state) => state)
@@ -52,6 +53,7 @@ function AuthF(){
   }
 
   return (
+    <div><NavBar/>
     <div style = {{marginLeft: '600px', marginRight: '600px', marginTop: '100px' }}>
       
       <Form>
@@ -100,8 +102,8 @@ function AuthF(){
 
 
     <Button variant="primary"   onClick ={handleSub} >Sign up</Button>
-  </Form></div>
+  </Form></div></div>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthF);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { reqsetproject } from '../../Utils/redux/actions';
 import { SETIDPRO } from '../../Utils/redux/redux-types';
+import NavBarF from '../Header/NavBarForAuth';
 
 
-export default function ProjectF(){
+export default function Project(){
   const dispatch = useDispatch();
   const history = useHistory()
   const email = useSelector((state) => state.setAuth.email)
@@ -24,6 +25,7 @@ export default function ProjectF(){
 
   return(
     <div>
+      <NavBarF/>
       {projects.map((item) =>(
     <Card style ={{ margin: "100px", marginLeft:"300px", marginRight: "300px", color: ''}} bg="white">
       <Card.Header as="h5">{item.name_project}</Card.Header>

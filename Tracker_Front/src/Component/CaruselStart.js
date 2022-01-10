@@ -2,9 +2,9 @@ import React from 'react'
 import {Carousel} from 'react-bootstrap'
 import '../Styles/carusel.css'
 
-import f1 from './img/f1.jpg'
-import f2 from './img/f2.jpg'
-import f3 from './img/f3.jpg'
+import f1 from '../Styles/img/f1.jpg'
+import f2 from '../Styles/img/f2.jpg'
+import f3 from '../Styles/img/f3.jpg'
 
 export default function Carusel1(){
   return(

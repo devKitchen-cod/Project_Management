@@ -2,11 +2,11 @@
 import React from "react"
 import {Button, Card, Col, Container, Row } from "react-bootstrap"
 import Carusel1 from "../Component/CaruselStart"
-import NavBar from "../Component/NavBar"
+import NavBar from "../Component/Header/NavBar"
 import '../Styles/carusel.css'
-import f1 from '../Component/img/f4.jpg'
-import f2 from '../Component/img/f2.jpg'
-import f3 from '../Component/img/f3.jpg'
+import f1 from '../Styles/img/f4.jpg'
+import f2 from '../Styles/img/f2.jpg'
+import f3 from '../Styles/img/f3.jpg'
 import { useHistory } from "react-router"
 
 

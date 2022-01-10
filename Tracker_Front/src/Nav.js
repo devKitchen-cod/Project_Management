@@ -5,23 +5,23 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Vue_Project from './Component/logic_component/VueProject';
+
+import Auth from './Component/Main/Auth';
+import Login from './Component/Main/Login';
+
+import Vue_Project from './Component/vueProject/VueProject';
 import CreateTask from './Component/vueProject/CreateTask';
 import EditTask from './Component/vueProject/EditTask';
-import Auth from './Pages/Auth';
-import Create from './Pages/CreateProject';
-import HomePage from './Pages/Home'
-import Login from './Pages/Login';
-import Project from './Pages/Project';
-import StartPage from './Pages/StartPage'
-import StartPageF from './Pages/StartPageforauth';
-import Story from './Pages/Story';
-import Tracker from './Pages/Tracker';
+
 import GuardedRoute from './Utils/GuardPro';
 
+import StartPageF from './Pages/StartPageforauth'
 
-
-
+import StartPage from './Pages/StartPage'
+import Tracker from './Component/Main/Tracker'
+import Project from './Component/Main/Project'
+import Create from './Component/Main/Create'
+import Story from './Component/Main/Story'
 
 export default function Nav(){
   const item = useSelector((state) => state.enter)
@@ -41,8 +41,8 @@ export default function Nav(){
     
         <Route path = '/auth'><Auth/></Route>
         <Route path = '/login'><Login/></Route>
-        <Route path = '/home'><HomePage/></Route>
         <Route path = "/"><StartPage/></Route>
+        
       </Switch>
     </Router>
   )

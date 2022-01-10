@@ -6,9 +6,10 @@ import DisplayComponent from '../../Utils/DisplayComponent';
 import BtnComponent from '../../Utils/BtnComponent';
 import { SETNAMEOFPROJECT, SETTASKFORTRACKING } from '../../Utils/redux/redux-types';
 import { reqreadtask, reqsetproject, reqsettimeproject } from '../../Utils/redux/actions';
+import NavBarF from '../Header/NavBarForAuth';
 
 
-export default function TrackerF(){
+export default function Tracker(){
   const dispatch = useDispatch();
 
   const [time, setTime] = useState({ms:0, s:0, m:0, h:0});
@@ -78,6 +79,7 @@ export default function TrackerF(){
 
   return (
     <div>
+      <NavBarF/>
       <div className="main-section">
         <div className="clock-holder">
           <div className="stopwatch">

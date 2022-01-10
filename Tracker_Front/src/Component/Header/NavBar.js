@@ -1,6 +1,6 @@
 import React from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Nav, NavDropdown, Navbar, Container} from 'react-bootstrap/'
+import {Nav, Navbar, Container} from 'react-bootstrap/'
 
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
