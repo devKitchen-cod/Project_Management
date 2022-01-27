@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Button, Dropdown, DropdownButton, Form, Modal, ModalBody, ModalDialog, ModalFooter, Tab, Tabs } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETUSERTASK } from '../../Utils/redux/redux-types'
- import NavBarF from '../Header/NavBarForAuth'
+import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETUSERTASK } from '../../../Utils/redux/redux-types'
+
+ 
 import Developers from './Developers'
 import Tasks from './Tasks'
-import {reqcreatetask, reqGetAllUsers, reqreadtask} from '../../Utils/redux/actions'
+import {reqcreatetask, reqGetAllUsers, reqreadtask} from '../../../Utils/redux/actions'
 
 const mapDispatchToProps = {
   reqcreatetask
@@ -78,7 +79,7 @@ function Vue_Project(){
     } 
 
   return(
-  <div><NavBarF/>
+  <div>
     <div style = {{textAlign: 'center'}}>
       <div className = 'editButton' style = {{display:'inline' }}><Button >Edit Task</Button></div>
           <div className = 'createButton' style = {{display:'inline', padding: '10px'}}>

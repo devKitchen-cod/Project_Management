@@ -16,7 +16,6 @@ function enterReducer(state = init, action){
     default:return state 
   }
 }
-
 const init_auth ={
   email: '',
   name: '',
@@ -153,5 +152,6 @@ export const rootReducer = combineReducers({
   setProject: setProject,
   reducer: reducer,
   setTask: setTask,
+  
   
 })

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 
 import { LOGIN, SETEMAIL, SETPASSWORD } from '../../Utils/redux/redux-types'
 import { reqlogin } from '../../Utils/redux/actions';
-import NavBar from '../Header/NavBar';
+
    
 const mapDispatchToProps = {
   reqlogin,
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
   }
 
   return(
-    <div><NavBar/>
+    
     <Form style = {{marginLeft: '700px', marginRight: '700px', marginTop: '100px' }}>
     <Form.Group className="mb-3" controlId="formBasicEmail" onChange = {e => setEmail(e.target.value)}>
       <Form.Label>Email address</Form.Label>
@@ -64,12 +64,10 @@ const mapStateToProps = (state) => {
     <Form.Group className="mb-3" controlId="formBasicCheckbox">
       <Form.Check type="checkbox" label="I agree"  onChange ={handleDispatch}/>
     </Form.Group>
-    <Button variant="primary" onClick={ handlesub }>Sign in</Button>
-  </Form></div>
+    <Button variant="primary" onClick={handlesub}>Sign in</Button>
+  </Form>
   )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogForm);
 
-//dispatch({type: SETEMAIL, payload: e.target.value})
-//dispatch({type:SETPASSWORD, payload: e.target.value})

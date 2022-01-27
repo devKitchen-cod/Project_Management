@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { reqreadtask } from '../../Utils/redux/actions'
+import { reqreadtask } from '../../../Utils/redux/actions'
 
 
 export default function Tasks(){

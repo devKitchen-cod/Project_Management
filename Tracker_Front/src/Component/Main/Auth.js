@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 
 import { LOGIN, SETEMAIL, SETNAME, SETPASSWORD } from '../../Utils/redux/redux-types';
 import { reqauth } from '../../Utils/redux/actions';
-import NavBar from '../Header/NavBar';
+
 
 const mapDispatchToProps = {
   reqauth,
@@ -53,7 +53,7 @@ function Auth(){
   }
 
   return (
-    <div><NavBar/>
+    <div>
     <div style = {{marginLeft: '600px', marginRight: '600px', marginTop: '100px' }}>
       
       <Form>
@@ -97,11 +97,11 @@ function Auth(){
     </Row>
   
     <Form.Group className="mb-3" id="formGridCheckbox">
-      <Form.Check type="checkbox" label="I agree with the terms of use" onChange = { handleDispatch}/>
+      <Form.Check type="checkbox" label="I agree with the terms of use" onChange = {handleDispatch}/>
     </Form.Group>
 
 
-    <Button variant="primary"   onClick ={handleSub} >Sign up</Button>
+    <Button variant="primary" onClick ={handleSub} >Sign up</Button>
   </Form></div></div>
   )
 }

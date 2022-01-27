@@ -1,9 +1,14 @@
 How to start Tracker_Back
 
-1. sudo docker run --rm --name work_db -e POSTGRES_PASSWORD=1 -e POSTGRES_USER=sergey1 -e POSTGRES_DB=work_db -d -p 5433:5432 -v $HOME/Documents/last_commits/Project_Management/Docker_Postgre:/var/lib/postgresql/data postgres
-2. sudo ss -lptn 'sport = :5432'
-3. sudo kill 931
-4. docker-compose up
+ sudo docker run --rm --name work_db -e POSTGRES_PASSWORD=1 -e POSTGRES_USER=sergey1 -e POSTGRES_DB=work_db -d -p 5433:5432 -v $HOME/Documents/last_commits/Project_Management/Docker_Postgre:/var/lib/postgresql/data postgres
+ sudo ss -lptn 'sport = :5432'
+ sudo kill 931
+ docker-compose up
 
 
 
+
+
+
+
+     

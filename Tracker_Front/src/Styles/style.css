@@ -1,0 +1,108 @@
+/* ==============introSection=================== */
+.mainContainer{
+  /* border: solid 5px greenyellow; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas: 
+  ". intro intro intro ."
+  ". body body body ."
+  ". body2 body2 body2 .";
+}
+
+.introSection{
+  /* border: solid 5px black; */
+  margin-top: 6em;
+  grid-area: intro;
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas: 
+  " sec1 sec1 img ";
+}
+.section1{
+  /* border: solid 5px red; */
+  grid-area: sec1;
+  align-self: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas: 
+  "textg textg textg "
+  "btngroup btngroup . "
+  
+  ;
+}
+.textgroup{
+  grid-area: textg;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "title title title "                        
+                        "text text text"
+  ;
+}
+h1{ 
+  grid-area: title ;
+}
+p{
+  margin: 1em;
+  grid-area: text ;
+  font-size: 1.3em;
+} 
+.btngroup{  
+  grid-area: btngroup;
+  /* border: solid 5px slateblue; */
+  display: inline-flex;
+}
+.signin {
+  margin: 1em;
+}
+.signup{
+  margin: 1em;
+}
+.timeimg{
+  /* border: solid 5px slateblue; */
+  grid-area: img;
+  height: 20em;
+  width: 35em;  
+}
+
+/* ==============bodySection=================== */
+.bodySection{
+  /* border: solid 5px slateblue; */
+  grid-area: body;
+  /* margin-top: 3em; */
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: auto;
+  grid-template-areas: 
+  ". e e"
+  "tr r r";
+ 
+}
+.textb{
+  /* border: solid 5px blue; */
+ grid-area: r; 
+ /* display: inline-flex; */
+}
+.track{
+  /* border: solid 5px red; */
+  grid-area: tr;
+  height: 20em;
+  width: 25em;
+}
+h2{
+  grid-area: e;
+}
+
+/* ==============bodySection2=================== */
+
+.bodySection2{
+  margin-top: 6em;
+  grid-area: body2;
+}
+.time3{
+  margin-left: 25em;
+}
+

@@ -1,60 +1,59 @@
 
 import React from "react"
-import {Button, Card, Col, Container, Row } from "react-bootstrap"
-import Carusel1 from "../Component/CaruselStart"
-import NavBar from "../Component/Header/NavBar"
-import '../Styles/carusel.css'
+import {Button, ButtonGroup, Card, Col, Container, Row } from "react-bootstrap"
+import Carusel1 from "./StyledComponent/CaruselStart"
+import '../Styles/style.css'
 import f1 from '../Styles/img/f4.jpg'
-import f2 from '../Styles/img/f2.jpg'
-import f3 from '../Styles/img/f3.jpg'
-import { useHistory } from "react-router"
+import f5 from '../Styles/img/f5.jpg'
+import f6 from '../Styles/img/f6.png'
+import f7 from '../Styles/img/f7.svg'
+import f8 from '../Styles/img/f8.svg'
+import f10 from '../Styles/img/f10.jpg'
 
-
+import Cards from "./StyledComponent/Cards"
 export default function StartPage(){
-  const history = useHistory();
   
   return(
-    <div>
-      <NavBar/>
-      <div className = 'carusel'><Carusel1/><div className ='bg-dark'>
-        <Container style = {{paddingTop: '2rem', paddingBottom: '2rem'}}>
-        <Row>
-            <Col>
-              <Card style = {{width: '18rem'}}>
-                  <Card.Img variant = 'top' src = {f1}/>
-                  <Card.Body>
-                    <Card.Title>startUP!</Card.Title>
-                    <Card.Text> Get your acccount for free</Card.Text>
-                    <Button variant = "primary"  onClick ={()=> history.push('/auth')}>Get Account</Button>
-                  </Card.Body>
-              </Card>
-            </Col>
+ 
+      <div className = 'mainContainer'>
+        
+        <div className = "introSection">          
+          <div className = "section1">
+            
+            <div className= "textgroup">
+               <h1>Работайте в команде</h1>
+               <p>Управляйте проектами и выводите продуктивность на новый уровень собственным уникальным способом вместе с startUP! Factory.</p>
+            </div>
 
-            <Col>
-              <Card style = {{width: '18rem'}}>
-                  <Card.Img variant = 'top' src = {f2}/>
-                  <Card.Body>
-                    <Card.Title>Create!</Card.Title>
-                    <Card.Text> Create Your own Project!</Card.Text>
-                    <Button variant = "primary" onClick ={()=> history.push('/create')}>Create</Button>
-                  </Card.Body>
-              </Card>
-            </Col>
+            <div className = 'btngroup'>
+              <div className ="signin"><Button variant="outline-primary" size = "lg">Enter</Button></div>
+              <div className ="signup"><Button variant="primary" size = "lg">Get Account</Button></div>              
+            </div>
+          </div>
 
-            <Col>
-              <Card style = {{width: '18rem'}}>
-                  <Card.Img variant = 'top' src = {f3}/>
-                  <Card.Body>
-                    <Card.Title>TracKING!</Card.Title>
-                    <Card.Text> Track Your Project 24/7 </Card.Text>
-                    <Button variant = "primary"  onClick ={()=> history.push('/tracker')}>Track</Button>
-                  </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>  
+          <img className = "timeimg" src = {f8}/>           
         </div>
+
+        <div className = "bodySection">          
+          <div className='textb'>
+            <h2>Это не просто работа. Это координация действий в команде.</h2>
+            <p>Начните с досок, колонок и карточек, а затем переходите к более сложным функциям. Управляйте проектами, упорядочивайте задачи и поддерживайте командный дух — все это в startUP! Factory.</p>
+          </div>
+          <img className = "track" src = {f7}/>           
         </div>
-    </div>
+
+        <div className = "bodySection2">
+          <div className = "texty">
+            <h2 className = "ltext">Функции для эффективной командной работы.</h2>
+            <p className = "stext">Продуктивность команды зависит от эффективных инструментов и комфортной рабочей обстановки. Интуитивно понятные функции Trello позволяют команде быстро настроить рабочие процессы для любых задач: от совещаний и проектов до мероприятий и постановки целей.</p>
+
+          </div>
+          <img className = "time3" src = {f10}/>           
+          <div class="block-animation"></div>
+        </div>
+
+      </div>
+ 
+
   )
 }

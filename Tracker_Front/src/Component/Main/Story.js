@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
-import NavBarF from '../Header/NavBarForAuth'
+
 
 
 function StoryF(){
   
   return(
-    <div><NavBarF/>
+    <div>
     <div>
         <Card style={{ width: '18rem' }}>
       
