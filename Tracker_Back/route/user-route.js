@@ -7,6 +7,8 @@ const trackcontroller = require('../controller/track-controller')
 const projController = require('../controller/projects-controller')
 const taskConstroller = require('../controller/task-controller')
 
+
+router.post('/task-read', taskConstroller.readTask)
 router.post('/task-create', taskConstroller.createTask)
 router.post('/task-read', taskConstroller.readTask)
 router.post('/user', userController.createUser)

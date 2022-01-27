@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import { rootReducer, setemail } from "./Utils/redux/rootReducer";
 import { Provider } from "react-redux";
 
-
+import "../src/Styles/indexstyle.css"
 
 export const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),

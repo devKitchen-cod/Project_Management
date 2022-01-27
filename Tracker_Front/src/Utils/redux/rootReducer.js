@@ -1,4 +1,4 @@
-import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK  } from "./redux-types";
+import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK, SETUSERTASK, SETTASKFORTRACKING, SETIDPRO  } from "./redux-types";
 import { combineReducers } from "redux"
 
 const init = {
@@ -16,7 +16,6 @@ function enterReducer(state = init, action){
     default:return state 
   }
 }
-
 const init_auth ={
   email: '',
   name: '',
@@ -41,6 +40,7 @@ function Auth(state = init_auth, action){
 const init_name_of_project = {
   name_of_project: '',
   list_of_projects: [],
+  time_of_project: 0
 }
 function setProject( state = init_name_of_project, action){
   switch(action.type){
@@ -50,6 +50,10 @@ function setProject( state = init_name_of_project, action){
     case SETPROJECT: {
       return {...state, list_of_projects: action.payload}
     }
+    case SETPROJECTTIME:{
+      return {...state, time_of_project: action.payload}
+    }
+
     default: return state
   }
 }
@@ -61,6 +65,11 @@ const init_task = {
   nameProject: '',
   allUsers: [],
   selectedProject: '',
+  readedTask: [],
+  selectedUser: '',
+  taskfortracking: '',
+  idforproj: '',
+  
 }
 function setTask(state = init_task, action){
   switch(action.type){
@@ -79,6 +88,19 @@ function setTask(state = init_task, action){
     case SETPROJECTFORTASK:{
       return{...state, selectedProject: action.payload}
     }
+    case READTASK:{
+      return {...state, readedTask: action.payload}
+    }
+    case SETUSERTASK: {
+      return {...state, selectedUser: action.payload}
+    }
+    case SETTASKFORTRACKING: {
+      return {...state, taskfortracking: action.payload}
+    }
+    case SETIDPRO: {
+      return {...state, idforproj: action.payload}
+    }
+    
     default: return state
   }
 }
@@ -130,5 +152,6 @@ export const rootReducer = combineReducers({
   setProject: setProject,
   reducer: reducer,
   setTask: setTask,
+  
   
 })

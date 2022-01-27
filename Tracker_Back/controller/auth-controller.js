@@ -25,7 +25,11 @@ module.exports.createUser = async function(req, res){
       console.log(err);
     }
   }
+<<<<<<< HEAD
   ada
+=======
+  
+>>>>>>> last_commits
   const VerifyEmail = async (req, res) => {
     const result = req 
     console.log(result)
