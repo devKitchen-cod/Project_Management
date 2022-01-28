@@ -1,0 +1,16 @@
+.container{
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "pic . some ";
+}
+
+.some{
+  margin-top: 10em;
+  grid-area: some;
+}
+
+.pic{
+  margin-top: 5em;
+  grid-area: pic;
+}

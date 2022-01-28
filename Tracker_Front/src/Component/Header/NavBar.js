@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Nav, Navbar, Container, NavDropdown, Dropdown, Row, Col, Stack} from 'react-bootstrap/'
-import "./StyleHeader.css"
+
+import "../../Styles/styleHeader.css"
+
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import Auth2 from "../Main/Auth2";
-import AuthForm from "../Main/Auth2";
+
 
 export default function NavBar(){
   const history = useHistory();

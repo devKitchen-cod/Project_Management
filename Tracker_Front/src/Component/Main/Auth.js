@@ -54,10 +54,10 @@ function Auth(){
 
   return (
     <div>
-    <div style = {{marginLeft: '600px', marginRight: '600px', marginTop: '100px' }}>
+      <div>
       
       <Form>
-    <Row className="mb-3">
+      <Row className="mb-3">
       
       <Form.Group as={Col} controlId="formGridEmail"  onChange = {e => setEmail(e.target.value)}>
         <Form.Label>Email</Form.Label>

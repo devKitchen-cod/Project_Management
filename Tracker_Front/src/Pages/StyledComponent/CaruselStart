@@ -1,6 +1,6 @@
 import React from 'react'
 import {Carousel} from 'react-bootstrap'
-import '../../Styles/style.css'
+
 
 import f1 from '../../Styles/img/f1.jpg'
 import f2 from '../../Styles/img/f2.jpg'
