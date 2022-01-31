@@ -1,0 +1,36 @@
+
+.main-container111{
+  display: grid;
+  grid-template-columns: repeat(5 1fr);
+  grid-template-areas: 
+  '. . . v . '
+  '. a . p .';
+  /* background-color: blue; */
+  height: 100vh;
+  
+}
+.project-container{
+  
+  grid-area: p;
+}
+.item{
+  justify-content: center;
+  margin: 20px;
+}
+.bt{
+  display: inline;
+  margin-left: 10px;
+}
+.m{
+  
+  grid-area: a;
+}
+.v{
+  height: 56px ;
+  display: inline-flex;
+  margin-top: 3em;
+  grid-area: v;
+}
+.bh{
+  margin-right: 10px;
+}

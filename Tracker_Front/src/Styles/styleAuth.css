@@ -1,0 +1,16 @@
+ .container123321{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: ". sub1 . t .";
+}
+
+.sub-container{
+  margin-top: 10em;
+  grid-area: sub1;  
+}
+
+
+.ee{
+  margin-top: 5em;
+  grid-area: t;
+}

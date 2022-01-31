@@ -6,6 +6,8 @@ import { useHistory } from 'react-router';
 import { LOGIN, SETEMAIL, SETNAME, SETPASSWORD } from '../../Utils/redux/redux-types';
 import { reqauth } from '../../Utils/redux/actions';
 
+import '../../Styles/styleAuth.css'
+import f11 from '../../Styles/img/f11.svg'
 
 const mapDispatchToProps = {
   reqauth,
@@ -53,56 +55,42 @@ function Auth(){
   }
 
   return (
-    <div>
-      <div>
+    <div className = "container123321">
+      <div className = 'sub-container'>
       
-      <Form>
-      <Row className="mb-3">
-      
-      <Form.Group as={Col} controlId="formGridEmail"  onChange = {e => setEmail(e.target.value)}>
+      <Form.Group className="mb-3"  as={Col} controlId="formGridEmail"  onChange = {e => setEmail(e.target.value)}>
         <Form.Label>Email</Form.Label>
         <Form.Control type="email" placeholder="Enter email"/>
       </Form.Group>
-  
-      <Form.Group as={Col} controlId="formGridPassword" onChange = {e => setPassword(e.target.value)}>
+      
+      <Form.Group className="mb-3" as={Col} controlId="formGridPassword" onChange = {e => setPassword(e.target.value)}>
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password"/>
       </Form.Group>
-    </Row>
-  
-    <Form.Group className="mb-3" controlId="formGridAddress1" onChange= {e => setName(e.target.value)}>
-      <Form.Label>Name</Form.Label>
-      <Form.Control  />
-    </Form.Group>
 
+      <Form.Group className="mb-3"  controlId="formGridAddress1" onChange= {e => setName(e.target.value)}>
+        <Form.Label>Name</Form.Label>
+       <Form.Control type="name" placeholder="Name" />
+      </Form.Group>
 
-    <Form.Group className="mb-3" controlId="formGridAddress2">
-      <Form.Label>Surname</Form.Label>
-      <Form.Control/>
-    </Form.Group>
-  
-    <Row className="mb-3">
-      <Form.Group as={Col} controlId="formGridCity">
+      <Form.Group className="mb-3"  controlId="formGridAddress2">
+        <Form.Label>Surname</Form.Label>
+        <Form.Control type="name" placeholder="Surname" />
+      </Form.Group>
+      
+      <Form.Group className="mb-3" as={Col} controlId="formGridCity">
         <Form.Label>City</Form.Label>
-        <Form.Control />
+        <Form.Control type="city" placeholder="City"/>
       </Form.Group>
-  
-      <Form.Group as={Col} controlId="formGridState">
-        <Form.Label>State</Form.Label>
-        <Form.Select defaultValue="Choose...">
-          <option>Choose...</option>
-          <option>...</option>
-        </Form.Select>
+      
+      <Form.Group  className="mb-3" id="formGridCheckbox">
+        <Form.Check type="checkbox" label="I agree with the terms of use" onChange = {handleDispatch}/>
       </Form.Group>
-    </Row>
-  
-    <Form.Group className="mb-3" id="formGridCheckbox">
-      <Form.Check type="checkbox" label="I agree with the terms of use" onChange = {handleDispatch}/>
-    </Form.Group>
-
-
-    <Button variant="primary" onClick ={handleSub} >Sign up</Button>
-  </Form></div></div>
+      <Button variant="primary" onClick ={handleSub} >Sign up</Button>
+    
+     </div>
+    <div className = 'ee'><img src = {f11}/></div>
+  </div>
   )
 }
 

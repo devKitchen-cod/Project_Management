@@ -49,3 +49,51 @@ export default function Carusel1(){
 </div>
   )
 }
+
+============================
+
+
+
+  <Form.Group as={Col} controlId="formGridEmail"  onChange = {e => setEmail(e.target.value)}>
+    <Form.Label>Email</Form.Label>
+    <Form.Control type="email" placeholder="Enter email"/>
+  </Form.Group>
+  
+      <Form.Group as={Col} controlId="formGridPassword" onChange = {e => setPassword(e.target.value)}>
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password"/>
+      </Form.Group>
+    
+  
+    <Form.Group  controlId="formGridAddress1" onChange= {e => setName(e.target.value)}>
+      <Form.Label>Name</Form.Label>
+      <Form.Control  />
+    </Form.Group>
+
+
+    <Form.Group  controlId="formGridAddress2">
+      <Form.Label>Surname</Form.Label>
+      <Form.Control/>
+    </Form.Group>
+  
+    
+      <Form.Group as={Col} controlId="formGridCity">
+        <Form.Label>City</Form.Label>
+        <Form.Control />
+      </Form.Group>
+  
+      <Form.Group as={Col} controlId="formGridState">
+        <Form.Label>State</Form.Label>
+        <Form.Select defaultValue="Choose...">
+          <option>Choose...</option>
+          <option>...</option>
+        </Form.Select>
+      </Form.Group>
+    
+  
+    <Form.Group  id="formGridCheckbox">
+      <Form.Check type="checkbox" label="I agree with the terms of use" onChange = {handleDispatch}/>
+    </Form.Group>
+
+
+    <Button variant="primary" onClick ={handleSub} >Sign up</Button>
