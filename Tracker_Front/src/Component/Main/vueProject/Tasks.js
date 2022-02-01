@@ -12,12 +12,10 @@ export default function Tasks(){
   
   useEffect(() => {
     dispatch(reqreadtask(idproj))
-    console.log("id in Tasks", idproj)  
   }, [idproj])
 
-  // console.log("id in Tasks", idproj)
   const readed_tasks = useSelector((state) => state.setTask.readedTask)
-  console.log(readed_tasks)
+
 
   return(
     <div>
@@ -34,9 +32,8 @@ export default function Tasks(){
     </tr>
   </thead>
 
-  {readed_tasks.map((item) => (
-    
-    <tbody>
+  {readed_tasks.map((item, key) => (
+    <tbody key={key}>
     <tr>
       <td style = {{textAlign: 'center'}}>{item.id}</td>
       <td style = {{textAlign: 'center'}}>{item.name_task}</td>

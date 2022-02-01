@@ -62,6 +62,7 @@ const init_task = {
   nameTask: '',
   timeTask: '',
   textTask: '',
+  
   nameProject: '',
   allUsers: [],
   selectedProject: '',

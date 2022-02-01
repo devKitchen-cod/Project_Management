@@ -49,7 +49,7 @@ export default function StartPage(){
 
           </div>
           <img className = "time3" src = {f10}/>           
-          <div class="block-animation"></div>
+          {/* <div class="block-animation"></div> */}
         </div>
 
 

@@ -1,11 +1,10 @@
+
 import React, { useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-
 import { SETNAMEOFPROJECT } from '../../Utils/redux/redux-types';
 import { notcreate, reqcreate } from '../../Utils/redux/actions';
-
 
 const mapDispatchToProps = {
   reqcreate,
@@ -43,8 +42,7 @@ const mapStateToProps = (state) => {
   }
 
   return (
-    <div>
-      
+    <div>      
       <div style ={{textAlign: 'center'}}>Create new project</div>
          <div style = {{marginLeft: '600px', marginRight: '600px', marginTop: '100px' }}>
              <Form.Group onChange = {e => dispatch({type:SETNAMEOFPROJECT, payload: e.target.value})}>

@@ -22,14 +22,11 @@ export default function NavBar(){
                    {auth ? (
                      <>                     
                      <Nav className="me-auto">
-                      <Nav.Link onClick={() => history.push('/project')}>Projects</Nav.Link>
-                      <Nav.Link onClick={() => history.push('/tracker')}>Tracker</Nav.Link>
-                      <Nav.Link onClick={() => history.push('/create')}>Create</Nav.Link>
-                      <Nav.Link onClick={() => history.push('/story')}>Story</Nav.Link>
+                      <Nav.Link onClick={() => history.push('/project')}>Projects</Nav.Link>                                                            
                     </Nav>
 
                     <Nav>
-                    <Nav.Link onClick={() => history.push('/story')}>{email}</Nav.Link>
+                    <Nav.Link onClick={() => history.push('/project')}>{email}</Nav.Link>
                     <Nav.Link onClick={() => window.location.replace("/")}>Logout</Nav.Link>
                     </Nav>  
                     </>                    

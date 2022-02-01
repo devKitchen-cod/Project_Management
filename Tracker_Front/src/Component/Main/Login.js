@@ -54,15 +54,12 @@ const mapStateToProps = (state) => {
 
   return(
     <>
-
         <Form>
           <div className = 'container'>
-
           <div className = "pic">
             <img src = {f8}/> 
           </div>
-    
-
+          
             <div className = "some">
           <Form.Group className="mb-3" controlId="formBasicEmail" onChange = {e => setEmail(e.target.value)}>
             <Form.Label>Email address</Form.Label>
@@ -84,7 +81,6 @@ const mapStateToProps = (state) => {
           </div>
           </div>
       </Form>
-
     </>
 
       

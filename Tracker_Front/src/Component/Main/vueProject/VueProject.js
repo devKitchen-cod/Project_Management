@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 };
 
 function Vue_Project(){  
-    
+    const history = useHistory()
     const dispatch = useDispatch()
     const state = useSelector((state) => state)
 
@@ -28,11 +28,7 @@ function Vue_Project(){
     const [timeTask, setTimeTask] = useState("")
     const [textTask, setTextTask] = useState("")
 
-    const handleSub = _event => {
-      dispatch({type: SETNAMETASK, payload: nameTask})
-      dispatch({type: SETTIMETASK, payload: timeTask})
-      dispatch({type: SETTEXTTASK, payload: textTask})  
-    }
+
 
     useEffect(()=>{
       if(nameTask !== '')setDis(false)
@@ -40,6 +36,7 @@ function Vue_Project(){
     },[nameTask])
 
     const nameProject = useSelector((state) => state.setProject.list_of_projects)
+    const namepro = useSelector((state) => state.setTask.idforproj)
 
     const nameTask1 = useSelector((state) => state.setTask.nameTask)
     const timeTask1 = useSelector((state) => state.setTask.timeTask)
@@ -51,6 +48,14 @@ function Vue_Project(){
     
     const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1, project_task: selectednameproj, user_task: selectedusertask}
     
+   
+
+    const handleSub = _event => {
+      dispatch({type: SETNAMETASK, payload: nameTask})
+      dispatch({type: SETTIMETASK, payload: timeTask})
+      dispatch({type: SETTEXTTASK, payload: textTask})  
+    }
+
     const handleDispatch = _event => {
       if(obj.nameTask, obj.timeTask, obj.textTask === ''){
         alert('fild form');
@@ -60,11 +65,11 @@ function Vue_Project(){
         handle_bool()
       }        
     }
-
     const handle_bool = _event => {
       console.log('reeeeaaad')
       alert('Created !')
-      dispatch(reqreadtask())
+      dispatch(reqreadtask(namepro))
+      history.push('/vue_project')
     }
     const [show, setShow] = useState(false)
     const handleClose = _event => {
@@ -75,27 +80,24 @@ function Vue_Project(){
     } 
     const handleShow = _event =>{
       setShow(true)
-      dispatch(reqGetAllUsers(), [])
+      dispatch(reqGetAllUsers())
     } 
 
   return(
   <div>
     <div style = {{textAlign: 'center'}}>
       <div className = 'editButton' style = {{display:'inline' }}><Button >Edit Task</Button></div>
-          <div className = 'createButton' style = {{display:'inline', padding: '10px'}}>
-          
-          <Button onClick = {handleShow}>Create Task</Button>
-          
+          <div className = 'createButton' style = {{display:'inline', padding: '10px'}}>          
+          <Button onClick = {handleShow}>Create Task</Button>          
           <Modal show = {show} onHide = {handleClose} backdrop="static"
             keyboard={false}>
-
-            <Modal.Header closeButton>
+          <Modal.Header closeButton>
               <Modal.Title>Create Task 
                 <Form.Group onChange = {e => setNameTask(e.target.value)}>
                   <Form.Control type="text" placeholder="New Task"  />
                 </Form.Group>
               </Modal.Title>
-            </Modal.Header>
+          </Modal.Header>
 
             <ModalBody>
               Task
@@ -111,15 +113,15 @@ function Vue_Project(){
                 Project
                 <Form.Select defaultValue = 'Choose Project' onChange = {e => dispatch({type: SETPROJECTFORTASK, payload: e.target.value})}>
                   <option disabled>Choose Project</option>   
-                  {nameProject.map((item) => (
-                  <option value = {item.name_project}>{item.name_project}</option>
+                  {nameProject.map((item, key) => (
+                  <option value = {item.name_project} key={key}>{item.name_project}</option>
                 ))} </Form.Select>
 
               Users
               <Form.Select defaultValue = 'Choose User' onChange = {e => dispatch({type: SETUSERTASK, payload: e.target.value})}>
               <option disabled>Choose User</option>
-                {users.map((item) => (<option value ={item.name_user}>{item.name_user}</option>))}</Form.Select>
-              </ModalBody>
+                {users.map((item, key) => (<option value ={item.name_user} key={key}>{item.name_user}</option>))}</Form.Select>
+            </ModalBody>
 
             <ModalFooter>
             <Button variant="secondary" onClick={handleClose}>

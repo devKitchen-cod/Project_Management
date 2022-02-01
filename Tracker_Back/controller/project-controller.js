@@ -11,6 +11,14 @@ module.exports.createProject = async function(req, res){
       console.log(err);
     }
 }
+
+module.exports.deleteProject = async function(req,res){
+  // let deletedProject = {name: , user:}
+  // DELETE PROJECT AND ALL TASKS OF PROJECT
+}
+
+
+
 module.exports.trackContrl = async function(req, res){
   let Tracking = {nameProject:req.body.nameProject, workTime: req.body.workTime}
     
