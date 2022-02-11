@@ -1,53 +1,110 @@
 
 import React, { useEffect } from 'react'
-import { Button, Table } from 'react-bootstrap'
+import { Accordion, Button, Card, Tab, Table, Tabs } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { reqreadtask } from '../../../Utils/redux/actions'
+import { reqreadplannedTaskF, reqreadtask,reqreadInProgresTaskF, reqreadDoneTaskF } from '../../../Utils/redux/actions'
 
 
 export default function Tasks(){
   const dispatch = useDispatch()
+  // const statusTask = useSelector((state) => state.setTask.status)
+  const readedTasks = useSelector((state) => state.setTask.idforproj)
+  const readplannedTask = 'planned'
+  const readInProgresTask = 'inprogress'
+  const readDoneTask = 'done'
 
-  const idproj = useSelector((state) => state.setTask.idforproj)
-  
   useEffect(() => {
-    dispatch(reqreadtask(idproj))
-  }, [idproj])
+    
+    dispatch(
+      reqreadtask(readedTasks),
+      reqreadplannedTaskF(readplannedTask),
+      reqreadInProgresTaskF(readInProgresTask),
+      reqreadDoneTaskF(readDoneTask)
+      )
+  }, [readedTasks])
 
   const readed_tasks = useSelector((state) => state.setTask.readedTask)
-
+  const readed_planned_tasks = useSelector((state) => state.setTask.planned)
+  const readed_inprogress_tasks = useSelector((state) => state.setTask.inprogress)
+  const readed_done_tasks = useSelector((state) => state.setTask.done)
 
   return(
-    <div>
- 
-    <Table striped bordered hover>
-  <thead>
-    <tr>
-      <th style = {{textAlign: 'center'}}>ID</th>
-      <th style = {{textAlign: 'center'}}>Task Name</th>
-      <th style = {{textAlign: 'center'}}>Description</th>
-      <th style = {{textAlign: 'center'}}>Project</th>
-      <th style = {{textAlign: 'center'}}>Time for task</th>
-      <th style = {{textAlign: 'center'}}>Task creator</th>
-    </tr>
-  </thead>
+    <div className ='container'>
 
-  {readed_tasks.map((item, key) => (
-    <tbody key={key}>
-    <tr>
-      <td style = {{textAlign: 'center'}}>{item.id}</td>
-      <td style = {{textAlign: 'center'}}>{item.name_task}</td>
-      <td style = {{textAlign: 'center'}}>{item.description_task}</td>
-      <td style = {{textAlign: 'center'}}>{item.project_task}</td>
-      <td style = {{textAlign: 'center'}}>{item.planned_time_task}</td>
-      <td style = {{textAlign: 'center'}}>{item.user_task}</td>
-    </tr>
-  </tbody>
+      <Tabs style = {{textAlign: 'center'}} defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
+         <Tab eventKey="home" title="Planned">
+            {readed_planned_tasks.map((item) => (
+              <Card>
+                ---
+              </Card>
+            ))}
+          </Tab>
 
-  ))}
+          <Tab eventKey="profile" title="Done">
+              {readed_done_tasks.map((item) => (
+                <Card>
+                  ---
+                </Card>
+              ))}
+          </Tab>
 
-</Table>
+          <Tab eventKey="profile" title="In Progres">
+              {readed_inprogress_tasks.map((item) => (
+                <Card>
+                  ---
+                </Card>
+              ))}
+          </Tab>
+      
+          <Tab eventKey="contact" title="All Tasks">
+              {readed_tasks.map((item) =>(
+              <Card style={{ width: '18rem', margin:'20px'}}>
+              <Card.Body>
+                <Card.Title>{item.name_task}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted"><h5>Time:</h5> {item.planned_time_task}</Card.Subtitle>
+                <Card.Text>
+                <Accordion defaultActiveKey="0">
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header>Description</Accordion.Header>
+                    <Accordion.Body>
+                      {item.description_task}
+                    </Accordion.Body>
+                  </Accordion.Item>  
+                </Accordion>
+                </Card.Text>
+              </Card.Body>
+              <Card.Footer>
 
-</div>
+                <Button style = {{margin: '10px'}}>Edit</Button>
+                <Button>Delete</Button>
+                <Button style= {{margin: '10px'}}>Done</Button>
+
+              </Card.Footer>
+            </Card>
+
+          ))}
+          </Tab>
+      </Tabs>
+
+
+      
+
+
+    </div>
   )
 }
+  
+
+
+  
+
+
+//{item.id}
+//{item.name_task}
+//{item.description_task}
+//{item.project_task}
+//{item.planned_time_task}
+//{item.user_task}
+ 
+
+ 

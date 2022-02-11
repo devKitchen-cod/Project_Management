@@ -9,7 +9,7 @@ import f7 from '../Styles/img/f7.svg'
 import f8 from '../Styles/img/f8.svg'
 import f10 from '../Styles/img/f10.jpg'
 
-import Cards from "./StyledComponent/Cards"
+
 
 export default function StartPage(){
   

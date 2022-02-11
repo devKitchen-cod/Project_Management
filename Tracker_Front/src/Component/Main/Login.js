@@ -4,9 +4,6 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { LOGIN, SETEMAIL, SETPASSWORD } from '../../Utils/redux/redux-types'
 import { reqlogin } from '../../Utils/redux/actions';
-
-
-
 import f8 from '../../Styles/img/f8.svg'
 import '../../Styles/styleLogin.css'
    
@@ -82,12 +79,6 @@ const mapStateToProps = (state) => {
           </div>
       </Form>
     </>
-
-      
-    
-
-
-
       )
 }
 

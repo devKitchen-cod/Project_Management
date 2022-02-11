@@ -6,9 +6,16 @@ const userController = require('../controller/auth-controller')
 const trackcontroller = require('../controller/project-controller')
 const projController = require('../controller/projects-controller')
 const taskConstroller = require('../controller/task-controller')
+const deleteProject = require('../controller/project-controller')
 
+router.post('/delete-project', deleteProject.deleteProject)
 
 router.post('/task-read', taskConstroller.readTask)
+router.post('/task-planned', taskConstroller.readTaskPlanned)
+router.post('/task-read-inprogress', taskConstroller.readTaskInProgress)
+router.post('/task-read-done', taskConstroller.readTaskInDone)
+
+
 router.post('/task-create', taskConstroller.createTask)
 router.post('/task-read', taskConstroller.readTask)
 router.post('/user', userController.createUser)

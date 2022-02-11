@@ -20,9 +20,9 @@ const success_create = () =>{
 const err_create = () => {
   return {type: 'err_create'}
 }
-// const setpro =() => {
-//   return {type: SETPROJECT}
-// }
+const deleted = () => {
+  return{type: 'deleted'}
+}
 
 export const reqlogin = (obj) => {
   return(dispatch) => {
@@ -77,6 +77,23 @@ export const reqcreate = (obj) => {
           )}
 }
 
+
+export const reqDeleteProject = (name_project, email) => {
+  return (dispatch) => {
+    console.log('action ----'+name_project, email)
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/delete-project",
+      data:{name: name_project, user: email}      
+    })
+    .then(      
+      dispatch(deleted())
+
+    )
+  }
+}
+
+
 export const reqsettimeproject = (obj) => {
       return (dispatch) => {
           axios({
@@ -117,7 +134,7 @@ export const reqcreatetask = (obj) => {
     axios({
       method: "POST",
       url: "http://localhost:8080/api/task-create",
-      data: {name_of_task: obj.nameTask, time_for_task: obj.timeTask, descripton_of_task: obj.textTask, project_task: obj.project_task, user_task: obj.user_task }
+      data: {name_of_task: obj.nameTask, time_for_task: obj.timeTask, descripton_of_task: obj.textTask, project_task: obj.project_task, user_task: obj.user_task, status_task:obj.status_task }
     })
     .then(
       dispatch(success_create()),
@@ -125,7 +142,6 @@ export const reqcreatetask = (obj) => {
    )
   }
 }
-
 
 export const reqGetAllUsers = () =>{
   return(dispatch) => {
@@ -139,17 +155,47 @@ export const reqGetAllUsers = () =>{
   }
 }
 
-
-export const reqreadtask = (idproj) => {
+export const reqreadtask = (readedTasks) => {
   return (dispatch) => {
       axios({
         method: "POST",
         url: "http://localhost:8080/api/task-read",
-       data: {id: idproj}
+       data: {tasks: readedTasks}
       })
       .then((res) => {
         dispatch({type: READTASK, payload: res.data})
       })
   }
 }
+
+export const reqreadplannedTaskF= (readplannedTask) =>{
+  return(dispatch)=>{
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/task-planned",
+     data: {tasks: readplannedTask}
+    })
+  }
+}
+
+export const reqreadInProgresTaskF= (readInProgresTask) =>{
+  return(dispatch)=>{
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/task-read-inprogress",
+     data: {tasks: readInProgresTask}
+    })
+  }
+}
+
+export const reqreadDoneTaskF= (readDoneTask) =>{
+  return(dispatch)=>{
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/task-read-done",
+     data: {tasks: readDoneTask}
+    })
+  }
+}
+
 

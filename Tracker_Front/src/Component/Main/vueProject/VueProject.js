@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Dropdown, DropdownButton, Form, Modal, ModalBody, ModalDialog, ModalFooter, Tab, Tabs } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETUSERTASK } from '../../../Utils/redux/redux-types'
+import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETSTATUS, SETTEXTTASK, SETTIMETASK, SETUSERTASK } from '../../../Utils/redux/redux-types'
 
  
 import Developers from './Developers'
@@ -29,7 +29,6 @@ function Vue_Project(){
     const [textTask, setTextTask] = useState("")
 
 
-
     useEffect(()=>{
       if(nameTask !== '')setDis(false)
       else {setDis(true); }
@@ -45,9 +44,10 @@ function Vue_Project(){
     const users = useSelector((state) => state.setTask.allUsers)
     const selectednameproj = useSelector((state) => state.setTask.selectedProject)
     const selectedusertask = useSelector((state) => state.setTask.selectedUser)
+    const statusTask = useSelector((state) => state.setTask.status)
+    const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1, project_task: selectednameproj, user_task: selectedusertask, status_task: statusTask}
     
-    const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1, project_task: selectednameproj, user_task: selectedusertask}
-    
+    const status_obj = [{status: 'planned'}, {status: 'inprogress'}, {status: 'done'}]
    
 
     const handleSub = _event => {
@@ -55,12 +55,12 @@ function Vue_Project(){
       dispatch({type: SETTIMETASK, payload: timeTask})
       dispatch({type: SETTEXTTASK, payload: textTask})  
     }
-
     const handleDispatch = _event => {
       if(obj.nameTask, obj.timeTask, obj.textTask === ''){
         alert('fild form');
       }else{
-        dispatch(reqcreatetask(obj))  
+        dispatch(reqcreatetask(obj)) 
+    
         handleClose()
         handle_bool()
       }        
@@ -88,16 +88,18 @@ function Vue_Project(){
     <div style = {{textAlign: 'center'}}>
       <div className = 'editButton' style = {{display:'inline' }}><Button >Edit Task</Button></div>
           <div className = 'createButton' style = {{display:'inline', padding: '10px'}}>          
+          
           <Button onClick = {handleShow}>Create Task</Button>          
+          
           <Modal show = {show} onHide = {handleClose} backdrop="static"
             keyboard={false}>
-          <Modal.Header closeButton>
-              <Modal.Title>Create Task 
-                <Form.Group onChange = {e => setNameTask(e.target.value)}>
-                  <Form.Control type="text" placeholder="New Task"  />
-                </Form.Group>
-              </Modal.Title>
-          </Modal.Header>
+            <Modal.Header closeButton>
+                <Modal.Title>Create Task 
+                  <Form.Group onChange = {e => setNameTask(e.target.value)}>
+                    <Form.Control type="text" placeholder="New Task"  />
+                  </Form.Group>
+                </Modal.Title>
+            </Modal.Header>
 
             <ModalBody>
               Task
@@ -117,11 +119,20 @@ function Vue_Project(){
                   <option value = {item.name_project} key={key}>{item.name_project}</option>
                 ))} </Form.Select>
 
-              Users
-              <Form.Select defaultValue = 'Choose User' onChange = {e => dispatch({type: SETUSERTASK, payload: e.target.value})}>
-              <option disabled>Choose User</option>
-                {users.map((item, key) => (<option value ={item.name_user} key={key}>{item.name_user}</option>))}</Form.Select>
-            </ModalBody>
+                Users
+                <Form.Select defaultValue = 'Choose User' onChange = {e => dispatch({type: SETUSERTASK, payload: e.target.value})}>
+                <option disabled>Choose User</option>
+                  {users.map((item, key) => (<option value ={item.name_user} key={key}>{item.name_user}</option>))}</Form.Select>
+                Status
+                <Form.Select defaultValue = 'Choose Status' onChange = {e => dispatch({type: SETSTATUS, payload: e.target.value})}>
+                <option disabled>Choose Status</option>
+                {status_obj.map((item, key) => (<option value ={item.status} key ={key}>{item.status}</option>))}
+
+
+
+                </Form.Select>
+
+              </ModalBody>
 
             <ModalFooter>
             <Button variant="secondary" onClick={handleClose}>
@@ -143,17 +154,17 @@ function Vue_Project(){
       <div style = {{marginLeft:"300px", marginRight:"300px"}}> 
         <Tabs style = {{textAlign: 'center'}} defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
           
-          <Tab eventKey="home" title="Tasks">
-            <Tasks/>
+          <Tab eventKey="home" title="Description" >
+           
           </Tab>
 
           <Tab eventKey="profile" title="Developers">
               <Developers/>
           </Tab>
       
-          <Tab eventKey="contact" title="Description">
-              ggg3
-            </Tab>
+          <Tab eventKey="contact" title="Tasks">
+             <Tasks/>      
+          </Tab>
         </Tabs>
       </div>
     </div>
