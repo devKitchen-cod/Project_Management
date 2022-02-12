@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GETUSERS, READTASK, SETNAMETASK, SETPROJECT } from './redux-types'
+import { GETUSERS, READTASK, SETNAMETASK, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
 
 const start_login = () => {
   return {type: 'start_req'}
@@ -168,33 +168,38 @@ export const reqreadtask = (readedTasks) => {
   }
 }
 
-export const reqreadplannedTaskF= (readplannedTask) =>{
+export const reqreadplannedTaskF= (readplannedTask, readedTasks) =>{
+  
   return(dispatch)=>{
     axios({
       method: "POST",
       url: "http://localhost:8080/api/task-planned",
-     data: {tasks: readplannedTask}
+     data: {status: readplannedTask, name: readedTasks}
     })
+    .then((res) => {dispatch({type:SET_PLANNED_TASK, payload: res.data})})
   }
 }
 
-export const reqreadInProgresTaskF= (readInProgresTask) =>{
+export const reqreadInProgresTaskF= (readInProgresTask, readedTasks) =>{
   return(dispatch)=>{
     axios({
       method: "POST",
       url: "http://localhost:8080/api/task-read-inprogress",
-     data: {tasks: readInProgresTask}
+     data: {status: readInProgresTask, name: readedTasks}
     })
+    .then((res) => {dispatch({type:SET_INPROGRESS_TASK, payload: res.data})})
   }
 }
 
-export const reqreadDoneTaskF= (readDoneTask) =>{
+export const reqreadDoneTaskF= (readDoneTask, readedTasks) =>{
+  
   return(dispatch)=>{
     axios({
       method: "POST",
       url: "http://localhost:8080/api/task-read-done",
-     data: {tasks: readDoneTask}
+     data: {status: readDoneTask, name: readedTasks}
     })
+    .then((res) => {dispatch({type:SET_DONE_TASK, payload: res.data})})
   }
 }
 

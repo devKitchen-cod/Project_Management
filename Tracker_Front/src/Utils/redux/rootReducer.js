@@ -80,7 +80,6 @@ const init_task = {
   planned: [],
   inprogress: [],
   done:[]
-  
 }
 function Task(state = init_task, action){  //task
   switch(action.type){
