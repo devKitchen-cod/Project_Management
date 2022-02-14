@@ -1,4 +1,4 @@
-import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK, SETUSERTASK, SETTASKFORTRACKING, SETIDPRO, DELETEPROJECT, SETSTATUS, SET_PLANNED_TASK, SET_INPROGRESS_TASK, SET_DONE_TASK  } from "./redux-types";
+import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK, SETUSERTASK, SETTASKFORTRACKING, SETIDPRO, DELETEPROJECT, SETSTATUS, SET_PLANNED_TASK, SET_INPROGRESS_TASK, SET_DONE_TASK, SET_CHANGED_TASK  } from "./redux-types";
 import { combineReducers } from "redux"
 
 const init = {
@@ -79,7 +79,8 @@ const init_task = {
   readedTask: [], //all tasks
   planned: [],
   inprogress: [],
-  done:[]
+  done:[],
+  changed_task: ''
 }
 function Task(state = init_task, action){  //task
   switch(action.type){
@@ -122,6 +123,10 @@ function Task(state = init_task, action){  //task
     case SET_DONE_TASK:{
       return {...state, done: action.payload}
     }
+    case SET_CHANGED_TASK:{
+      return {...state, changed_task: action.payload}
+    }
+
     default: return state
   }
 }
@@ -133,6 +138,9 @@ const initialState = {
   deleted: false,
   loading: false,
   error: false,
+  change:false
+
+  
 };
 const Flags = (state = initialState, action) => { //true/false flags
   switch (action.type) {
@@ -162,7 +170,16 @@ const Flags = (state = initialState, action) => { //true/false flags
       return{
         deleted: true
       }  
-      
+    case 'success_change_status':{
+      return{
+        change:true
+      }
+    }
+    case 'stop_change_status':{
+      return{
+        change:false
+      }
+    }
     default:
       return state;
   }

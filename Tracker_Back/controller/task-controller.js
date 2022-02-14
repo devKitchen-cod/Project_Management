@@ -53,6 +53,27 @@ module.exports.readTaskInDone = async function(req, res){  //Done
 //--reading tasks---------------
 
 
+
+//--change status tasks---------------
+
+module.exports.changeStatusTask = async function(req, res){
+  let newdata = {status: req.body.status, id: req.body.id}
+  console.log(newdata.status, newdata.id)
+  let result_of_request_change = ''
+  try {
+     await db.query(`UPDATE "Tasks_Table" SET "status" =  $1 WHERE "id"= $2`, [newdata.status, newdata.id])
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
+//--change status tasks---------------
+
+
+
+
+
 //--delete tasks---------------
 
 // module.exports.deleteTasks = async function(req, res){

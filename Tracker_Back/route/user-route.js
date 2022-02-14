@@ -14,6 +14,7 @@ router.post('/task-read', taskConstroller.readTask)
 router.post('/task-planned', taskConstroller.readTaskPlanned)
 router.post('/task-read-inprogress', taskConstroller.readTaskInProgress)
 router.post('/task-read-done', taskConstroller.readTaskInDone)
+router.post('/task-change-status', taskConstroller.changeStatusTask)
 
 
 router.post('/task-create', taskConstroller.createTask)

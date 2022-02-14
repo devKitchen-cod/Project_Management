@@ -24,6 +24,15 @@ const deleted = () => {
   return{type: 'deleted'}
 }
 
+const start_change =() =>{
+  return{type: 'success_change_status'}
+}
+
+const stop_change =() =>{
+  return{type: 'stop_change_status'}
+}
+
+
 export const reqlogin = (obj) => {
   return(dispatch) => {
     dispatch(start_login());
@@ -203,4 +212,26 @@ export const reqreadDoneTaskF= (readDoneTask, readedTasks) =>{
   }
 }
 
+export const reqchangeStatus =  (id, changedStatus) =>{
+  
+  return(dispatch) => {
+    console.log('reqchange ==='+ id+'/'+ changedStatus)
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/task-change-status",
+      data: {status: changedStatus, id: id}
+    })
+    .then(
+      dispatch(start_change()),
+      (err) => dispatch(stop_change(err))
+   )
+    
+  }
+}
 
+
+export const stopChange = () => {
+  return(dispatch) => {
+    dispatch(stop_change())
+  }
+}
