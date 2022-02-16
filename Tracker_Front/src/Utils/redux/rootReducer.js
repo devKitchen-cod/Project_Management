@@ -1,4 +1,4 @@
-import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK, SETUSERTASK, SETTASKFORTRACKING, SETIDPRO, DELETEPROJECT, SETSTATUS, SET_PLANNED_TASK, SET_INPROGRESS_TASK, SET_DONE_TASK, SET_CHANGED_TASK  } from "./redux-types";
+import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK, SETUSERTASK, SETTASKFORTRACKING, SETIDPRO, DELETEPROJECT, SETSTATUS, SET_PLANNED_TASK, SET_INPROGRESS_TASK, SET_DONE_TASK, SET_CHANGED_TASK, SETDESCRIPTIONOFPROJECT, GETDESCRIPTIONOFPROJECT  } from "./redux-types";
 import { combineReducers } from "redux"
 
 const init = {
@@ -41,13 +41,21 @@ const init_name_of_project = { //project
   name_of_project: '',
   list_of_projects: [],
   time_of_project: 0,
-  deleted_project:''
+  deleted_project:'',
+  descrip_project: '',
+  get_descrip_proj: ''
 }
 function Project( state = init_name_of_project, action){
   switch(action.type){
     case SETNAMEOFPROJECT: {
       return {...state, name_of_project: action.payload}
     }
+    case SETDESCRIPTIONOFPROJECT:{
+      return{...state, descrip_project: action.payload}
+    }
+    // case GETDESCRIPTIONOFPROJECT:{
+    //   return{...state, get_descrip_proj:action.payload}
+    // }
     case SETPROJECT: {
       return {...state, list_of_projects: action.payload}
     }
@@ -180,9 +188,14 @@ const Flags = (state = initialState, action) => { //true/false flags
         change:false
       }
     }
+    case 'stop_deleting':{
+      return{
+        deleted: false
+      }
+    }
     default:
       return state;
-  }
+  }  
 };
 
   

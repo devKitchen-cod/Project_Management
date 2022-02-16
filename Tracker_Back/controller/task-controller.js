@@ -76,8 +76,14 @@ module.exports.changeStatusTask = async function(req, res){
 
 //--delete tasks---------------
 
-// module.exports.deleteTasks = async function(req, res){
-
-// }
+module.exports.deleteTasks = async function(req, res){
+  let newData = {id: req.body.id}
+  console.log(newData.id)
+  try {
+    await db.query(`delete from "Tasks_Table" where "id"= $1`, [newData.id])
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 //--delete tasks---------------

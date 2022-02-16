@@ -5,15 +5,22 @@
   grid-template-columns: repeat(5 1fr);
   grid-template-areas: 
   'v p p clc .'
-  'v p p clc .'
+  'l p p clc .'
   '. . . . .';
   /* background-color: blue; */
   height: 100vh;
   
 }
+.create-btn{
+  grid-area: l;
+  margin-left: 2em;
+
+}
+
 .project-container{
   /* border: 3px solid black; */
   margin-top: 4em ;
+  margin-left: 2em;
   grid-area: p;
 }
 .item{
@@ -33,9 +40,10 @@
   /* border: 3px solid blueviolet; */
   grid-area: v;
   height: 56px ;
-  display: inline-flex;
+  display: block;
   margin-top: 3em;
   margin-left: 2em;
+  
   
 }
 .bh{
@@ -46,6 +54,15 @@
   grid-area: clc;
   margin: 20px;
   margin-top: 4em;
-  
-  
+}
+
+.form1{
+  margin: 2em;
+}
+.form2{
+  margin: 2em;
+}
+
+.accord{
+  margin: 2em;
 }

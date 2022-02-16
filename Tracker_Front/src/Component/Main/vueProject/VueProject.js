@@ -7,7 +7,7 @@ import { CREATETASK, SETNAMETASK, SETPROJECTFORTASK, SETSTATUS, SETTEXTTASK, SET
  
 import Developers from './Developers'
 import Tasks from './Tasks'
-import {reqcreatetask, reqGetAllUsers, reqreadtask} from '../../../Utils/redux/actions'
+import {reqcreatetask, reqGetAllUsers, reqreadDoneTaskF, reqreadInProgresTaskF, reqreadplannedTaskF, reqreadtask} from '../../../Utils/redux/actions'
 
 const mapDispatchToProps = {
   reqcreatetask
@@ -28,7 +28,6 @@ function Vue_Project(){
     const [timeTask, setTimeTask] = useState("")
     const [textTask, setTextTask] = useState("")
 
-
     useEffect(()=>{
       if(nameTask !== '')setDis(false)
       else {setDis(true); }
@@ -48,7 +47,6 @@ function Vue_Project(){
     const obj = {nameTask: nameTask1, timeTask: timeTask1, textTask: textTask1, project_task: selectednameproj, user_task: selectedusertask, status_task: statusTask}
     
     const status_obj = [{status: 'planned'}, {status: 'inprogress'}, {status: 'done'}]
-   
 
     const handleSub = _event => {
       dispatch({type: SETNAMETASK, payload: nameTask})
@@ -59,17 +57,19 @@ function Vue_Project(){
       if(obj.nameTask, obj.timeTask, obj.textTask === ''){
         alert('fild form');
       }else{
-        dispatch(reqcreatetask(obj)) 
-    
+        dispatch(reqcreatetask(obj))     
         handleClose()
         handle_bool()
       }        
     }
+
     const handle_bool = _event => {
       console.log('reeeeaaad')
       alert('Created !')
+      
       dispatch(reqreadtask(namepro))
-      history.push('/vue_project')
+      return(<Tasks/>)
+      // history.push('/vue_project')
     }
     const [show, setShow] = useState(false)
     const handleClose = _event => {
@@ -127,9 +127,6 @@ function Vue_Project(){
                 <Form.Select defaultValue = 'Choose Status' onChange = {e => dispatch({type: SETSTATUS, payload: e.target.value})}>
                 <option disabled>Choose Status</option>
                 {status_obj.map((item, key) => (<option value ={item.status} key ={key}>{item.status}</option>))}
-
-
-
                 </Form.Select>
 
               </ModalBody>
@@ -145,26 +142,23 @@ function Vue_Project(){
                 Confirm
               </Button>
             </ModalFooter>  
-
           </Modal>
         </div>
-        <div className = 'findButton' style = {{display:'inline'}}> <Button >Find Task</Button></div>
+        <div className = 'findButton' style = {{display:'inline'}}><Button>Find Task</Button></div>
 
       </div>
       <div style = {{marginLeft:"300px", marginRight:"300px"}}> 
         <Tabs style = {{textAlign: 'center'}} defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
           
-          <Tab eventKey="home" title="Description" >
-           
+          <Tab eventKey="home" title="Tasks" >
+          <Tasks/>
           </Tab>
 
           <Tab eventKey="profile" title="Developers">
               <Developers/>
           </Tab>
       
-          <Tab eventKey="contact" title="Tasks">
-             <Tasks/>      
-          </Tab>
+          
         </Tabs>
       </div>
     </div>

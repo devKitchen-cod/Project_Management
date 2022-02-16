@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Accordion, Button, Card, Dropdown, Tab, Table, Tabs, ProgressBar } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { reqreadplannedTaskF, reqreadtask,reqreadInProgresTaskF, reqreadDoneTaskF, reqchangeStatus, stopChange } from '../../../Utils/redux/actions'
+import { reqreadplannedTaskF, reqreadtask,reqreadInProgresTaskF, reqreadDoneTaskF, reqchangeStatus, stopChange, deleteTask, stop_deleting } from '../../../Utils/redux/actions'
 import '../../../Styles/styleTasks.css'
 import { useHistory } from 'react-router'
 
@@ -28,14 +28,52 @@ export default function Tasks(){
   const readed_inprogress_tasks = useSelector((state) => state.setTask.inprogress)
   const readed_done_tasks = useSelector((state) => state.setTask.done)  
 
+
+
+  
+
+  useEffect(() => {
+    if(state.reducer.deleted == true){dispatch(reqreadtask(readedTasks))}
+    // dispatch(stop_deleting())
+    // return(<Tasks/>)
+    history.push('/vue_project')
+  }, [state.reducer.deleted])
+
+  useEffect(() => {
+    if(state.reducer.deleted == true){dispatch(reqreadplannedTaskF(readplannedTask, readedTasks))}
+    // dispatch(stop_deleting())
+    // return(<Tasks/>)
+    history.push('/vue_project')
+  }, [state.reducer.deleted])
+
+
+  useEffect(() => {
+    if(state.reducer.deleted == true){dispatch(reqreadInProgresTaskF(readInProgresTask, readedTasks))}
+    // dispatch(stop_deleting())
+    // return(<Tasks/>)
+    history.push('/vue_project')
+  }, [state.reducer.deleted])
+
+  useEffect(() => {
+    if(state.reducer.deleted == true){dispatch(reqreadDoneTaskF(readDoneTask, readedTasks))}
+    
+    // return(<Tasks/>)
+    history.push('/vue_project')
+    dispatch(stop_deleting())
+  }, [state.reducer.deleted])
+
+
+
+
   useEffect(() =>{
     console.log('state = '+ state.reducer.change)
     if(state.reducer.change == true){  
       dispatch(
         reqreadplannedTaskF(readplannedTask, readedTasks)     
       ) 
-      history.push('/vue_project')
+      // history.push('/vue_project')
       dispatch(stopChange())
+      return(<Tasks/>)
     }
   }, [state.reducer.change])
 
@@ -44,16 +82,18 @@ export default function Tasks(){
       dispatch(
         reqreadInProgresTaskF(readInProgresTask, readedTasks)
       ) 
-      history.push('/vue_project')
+      // history.push('/vue_project')
       dispatch(stopChange())
+      return(<Tasks/>)
     }
   }, [state.reducer.change])
 
   useEffect(() =>{
     if(state.reducer.change == true){  
       dispatch(reqreadDoneTaskF(readDoneTask, readedTasks)) 
-      history.push('/vue_project')
+      // history.push('/vue_project')
       dispatch(stopChange())
+      return(<Tasks/>)
     }
   }, [state.reducer.change])
 
@@ -69,9 +109,10 @@ export default function Tasks(){
   const handle_InProress =(id)=>{
     dispatch(reqchangeStatus(id, readInProgresTask))
   }
-
-
   
+  const handle_Delete = (id) => {
+    dispatch(deleteTask(id))
+  }
 
   return(
     <div className ='container111'>
@@ -105,12 +146,10 @@ export default function Tasks(){
                   <Dropdown.Item><Button onClick = {() => handle_Done(item.id)}>Done</Button></Dropdown.Item>                  
                   <Dropdown.Item><Button onClick = {() => handle_InProress(item.id)}>In proress</Button></Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item><Button>Delete</Button></Dropdown.Item>
+                  <Dropdown.Item><Button onClick = {() => handle_Delete(item.id)}>Delete</Button></Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>
-              
-              <ProgressBar now ={50} className = 'pro'/>
-              
+              </Dropdown>              
+              <ProgressBar now ={50} className = 'pro'/>              
               </Card.Footer>
             </Card>
             ))}
@@ -144,7 +183,7 @@ export default function Tasks(){
                   {/* <Dropdown.Item><Button onClick = {() => handle_Done(item.id)}>Done</Button></Dropdown.Item>                   */}
                   <Dropdown.Item><Button onClick = {() => handle_InProress(item.id)}>In proress</Button></Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item><Button>Delete</Button></Dropdown.Item>
+                  <Dropdown.Item><Button onClick = {() => handle_Delete(item.id)}>Delete</Button></Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               <ProgressBar now ={30} className = 'pro'/>
@@ -182,10 +221,9 @@ export default function Tasks(){
                   <Dropdown.Item><Button onClick = {() => handle_Done(item.id)}>Done</Button></Dropdown.Item>                  
                   {/* <Dropdown.Item><Button onClick = {() => handle_InProress(item.id)}>In proress</Button></Dropdown.Item> */}
                   <Dropdown.Divider />
-                  <Dropdown.Item><Button>Delete</Button></Dropdown.Item>
+                  <Dropdown.Item><Button onClick = {() => handle_Delete(item.id)}>Delete</Button></Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown>
-
                 <ProgressBar now ={90} className = 'pro'/>
 
                 </Card.Footer>
@@ -221,8 +259,8 @@ export default function Tasks(){
                   <Dropdown.Item><Button onClick = {() => handle_Planned(item.id)}>Planned</Button></Dropdown.Item>
                   <Dropdown.Item><Button onClick = {() => handle_Done(item.id)}>Done</Button></Dropdown.Item>                  
                   <Dropdown.Item><Button onClick = {() => handle_InProress(item.id)}>In proress</Button></Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item><Button>Delete</Button></Dropdown.Item>
+                  <Dropdown.Divider/>
+                  <Dropdown.Item><Button onClick = {() => handle_Delete(item.id)}>Delete</Button></Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown>
                 <ProgressBar now ={100} className = 'pro'/>

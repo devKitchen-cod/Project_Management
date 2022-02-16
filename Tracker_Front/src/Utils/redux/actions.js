@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GETUSERS, READTASK, SETNAMETASK, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
+import { GETDESCRIPTIONOFPROJECT, GETUSERS, READTASK, SETNAMETASK, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
 
 const start_login = () => {
   return {type: 'start_req'}
@@ -22,6 +22,9 @@ const err_create = () => {
 }
 const deleted = () => {
   return{type: 'deleted'}
+}
+export const stop_deleting = () =>{
+  return{type: 'stop_deleting'}
 }
 
 const start_change =() =>{
@@ -70,14 +73,15 @@ export const reqauth = (obj) => {
   }  
 }
 
-export const reqcreate = (obj) => {
+export const reqcreateProject = (obj) => {
       return (dispatch) => {
           axios({
             method: "POST",
             url: "http://localhost:8080/api/project",
             data: {
               name: obj.name_of_project,
-              user: obj.email  
+              user: obj.email,
+              description: obj.descrip 
             }
           })
           .then (
@@ -110,7 +114,7 @@ export const reqsettimeproject = (obj) => {
             url: "http://localhost:8080/api/tracker",
             data: {
               nameProject: obj.nameProject,     
-              workTime  : obj.workTime
+              workTime: obj.workTime
             }
            })
            .then (
@@ -138,6 +142,20 @@ export const reqsetproject = (obj) => {
       }
 }
 
+
+
+export const reqGetAllUsers = () =>{
+  return(dispatch) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/allusers",
+    })
+    .then((res) => {
+      dispatch({type: GETUSERS, payload: res.data})
+    })
+  }
+}
+
 export const reqcreatetask = (obj) => {
   return(dispatch) => {
     axios({
@@ -152,17 +170,6 @@ export const reqcreatetask = (obj) => {
   }
 }
 
-export const reqGetAllUsers = () =>{
-  return(dispatch) => {
-    axios({
-      method: "POST",
-      url: "http://localhost:8080/api/allusers",
-    })
-    .then((res) => {
-      dispatch({type: GETUSERS, payload: res.data})
-    })
-  }
-}
 
 export const reqreadtask = (readedTasks) => {
   return (dispatch) => {
@@ -177,8 +184,20 @@ export const reqreadtask = (readedTasks) => {
   }
 }
 
+// export const reqGetDescription = (name_of_project, owner) => {
+//   return (dispatch) => {
+//     axios({
+//       method: "POST",
+//       url: "http://localhost:8080/api/descriptionproject",
+//      data: {name: name_of_project, owner: owner}
+//     })
+//     .then((res) => {
+//       dispatch({type: GETDESCRIPTIONOFPROJECT, payload: res.data})
+//     })
+//   }
+// }
+
 export const reqreadplannedTaskF= (readplannedTask, readedTasks) =>{
-  
   return(dispatch)=>{
     axios({
       method: "POST",
@@ -225,13 +244,26 @@ export const reqchangeStatus =  (id, changedStatus) =>{
       dispatch(start_change()),
       (err) => dispatch(stop_change(err))
    )
-    
   }
 }
-
 
 export const stopChange = () => {
   return(dispatch) => {
     dispatch(stop_change())
+  }
+}
+
+export const deleteTask = (id) =>{
+  return (dispatch) => {
+    console.log(id)
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/task-delete-task",
+      data: {id: id}
+    })
+    .then(
+      dispatch(deleted()),
+      (err) => dispatch(stop_deleting(err))
+   )
   }
 }
