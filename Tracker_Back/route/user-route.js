@@ -27,5 +27,8 @@ router.post('/tracker', trackcontroller.trackContrl)
 router.post('/login', loginController.loginUser)
 router.post('/allproj', projController.getProject)
 router.post('/allusers', projController.getUsers)
+router.post('/allceo', projController.getAllCEO)
+router.post('/alldevops', projController.getALLDevOps)
+router.post('/alldevelopers', projController.getALLDevelopers)
 
 module.exports = router

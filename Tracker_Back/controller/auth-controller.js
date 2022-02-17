@@ -5,17 +5,16 @@ const db = require('../DataBase/db')
 
 module.exports.createUser = async function(req, res){
 
-    let newPerson = {name:req.body.name, email: req.body.email, password: req.body.password, role: 1}
+    let newPerson = {name:req.body.name, email: req.body.email, password: req.body.password, role: 1, proffetion: req.body.proffetion}
     console.log('========= '+newPerson.email)
     
     try {
-      
       const verify_email = await VerifyEmail(newPerson.email)
-      if(newPerson.email==='admin@gmail.com'){ newPerson = {name:req.body.name, email: req.body.email, password: req.body.password, role: 2}}
+      if(newPerson.email==='admin@gmail.com'){ newPerson = {name:req.body.name, email: req.body.email, password: req.body.password, role: 2, proffetion: req.body.proffetion}}
       
       if(verify_email === false){
         
-        db.query(`INSERT INTO "Users_Table" (name_user, email_user, password_user, role_user) values ($1, $2, $3, $4)`, [newPerson.name, newPerson.email, newPerson.password, newPerson.role])
+        db.query(`INSERT INTO "Users_Table" (name_user, email_user, password_user, role_user, proffetion) values ($1, $2, $3, $4, $5)`, [newPerson.name, newPerson.email, newPerson.password, newPerson.role, newPerson.proffetion])
         const token = jwt.sign({email: newPerson.email, password: newPerson.password}, keys.jwt, {expiresIn: 60 * 60 }) //create token
         res.status(200).json({token: token}) 
 

@@ -1,4 +1,4 @@
-import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK, SETUSERTASK, SETTASKFORTRACKING, SETIDPRO, DELETEPROJECT, SETSTATUS, SET_PLANNED_TASK, SET_INPROGRESS_TASK, SET_DONE_TASK, SET_CHANGED_TASK, SETDESCRIPTIONOFPROJECT, GETDESCRIPTIONOFPROJECT  } from "./redux-types";
+import { CREATETASK, GETUSERS, LOGIN, LOGOUT, SETEMAIL, SETNAME, SETNAMEOFPROJECT, SETNAMETASK, SETPASSWORD, SETPROJECT, SETPROJECTFORTASK, SETTEXTTASK, SETTIMETASK, SETPROJECTTIME, READTASK, SETUSERTASK, SETTASKFORTRACKING, SETIDPRO, DELETEPROJECT, SETSTATUS, SET_PLANNED_TASK, SET_INPROGRESS_TASK, SET_DONE_TASK, SET_CHANGED_TASK, SETDESCRIPTIONOFPROJECT, GETDESCRIPTIONOFPROJECT, SETPROFFETION, GETCEO, GETDEVOPS, GETDEVELOPERS  } from "./redux-types";
 import { combineReducers } from "redux"
 
 const init = {
@@ -19,7 +19,11 @@ function Login(state = init, action){ //login
 const init_auth ={
   email: '',
   name: '',
-  password: ''
+  password: '',
+  proffetion:'',
+  ceo:[],
+  devops:[],
+  developer:[]
 }
 function Auth(state = init_auth, action){ //Auth
   switch(action.type){
@@ -31,6 +35,18 @@ function Auth(state = init_auth, action){ //Auth
   }
   case SETPASSWORD: {
     return {...state, password: action.payload}
+  }
+  case SETPROFFETION:{
+    return {...state, proffetion: action.payload}
+  }
+  case GETCEO:{
+    return {...state, ceo:action.payload}    
+  }
+  case GETDEVOPS:{
+    return {...state, devops:action.payload}    
+  }
+  case GETDEVELOPERS:{
+    return {...state, developer:action.payload}    
   }
   default: return state 
   }

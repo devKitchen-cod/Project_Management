@@ -3,7 +3,7 @@ import {Form, Row, Col, Button} from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { LOGIN, SETEMAIL, SETNAME, SETPASSWORD } from '../../Utils/redux/redux-types';
+import { LOGIN, SETEMAIL, SETNAME, SETPASSWORD, SETPROFFETION } from '../../Utils/redux/redux-types';
 import { reqauth } from '../../Utils/redux/actions';
 
 import '../../Styles/styleAuth.css'
@@ -25,20 +25,23 @@ function Auth(){
   const [stateEmail, setEmail] = useState("")
   const [statePassword, setPassword] = useState("")
   const [stateName, setName] = useState("")
-
-  const email = useSelector((state) => state.setAuth.email)
-  const password = useSelector((state) => state.setAuth.password)
-  const name = useSelector((state) => state.setAuth.name)
+  const [stateProffetion, setProffetion] = useState("")
 
 
   const handleDispatch = _event => {
-  dispatch({type: SETEMAIL, payload: stateEmail})
-  dispatch({type: SETPASSWORD, payload: statePassword})
-  dispatch({type: SETNAME, payload: stateName})
+    dispatch({type: SETEMAIL, payload: stateEmail})
+    dispatch({type: SETPASSWORD, payload: statePassword})
+    dispatch({type: SETNAME, payload: stateName})
+    dispatch({type: SETPROFFETION, payload: stateProffetion})
+  }
+  const email = useSelector((state) => state.setAuth.email)
+  const password = useSelector((state) => state.setAuth.password)
+  const name = useSelector((state) => state.setAuth.name)
+  const proffetion = useSelector((state) => state.setAuth.proffetion)
 
-}
-  const obj = {email: email, password: password, name: name}
-  
+  const obj = {email: email, password: password, name: name, proffetion: proffetion}
+  console.log(obj)
+
   useEffect(() => {
     if(state.reducer.success){
       alert('Authorization was successful!!!');
@@ -47,12 +50,13 @@ function Auth(){
     }
   })
   const handleSub = _event => {
-    if(obj.email, obj.password, obj.name === ''){
+    if(obj.email, obj.password, obj.name, obj.proffetion === ''){
       alert('fild form');
     }else{
       dispatch(reqauth(obj))
     }
   }
+  console.log(proffetion)
 
   return (
     <div className = "container123321">
@@ -82,10 +86,23 @@ function Auth(){
         <Form.Label>City</Form.Label>
         <Form.Control type="city" placeholder="City"/>
       </Form.Group>
+
+      <Form.Group className="mb-3" as={Col} controlId="formGridCity" onChange = {e => setProffetion(e.target.value)}>
+      <Form.Label>Proffetion</Form.Label>
+      <Form.Select >
+        <option >Choose Proffetion</option>
+        <option value="CEO">CEO</option>
+        <option value="DevOps">DevOps</option>
+        <option value="Developer">Developer</option>
+      </Form.Select>
+      </Form.Group>
+
+      
       
       <Form.Group  className="mb-3" id="formGridCheckbox">
         <Form.Check type="checkbox" label="I agree with the terms of use" onChange = {handleDispatch}/>
       </Form.Group>
+
       <Button variant="primary" onClick ={handleSub} >Sign up</Button>
     
      </div>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GETDESCRIPTIONOFPROJECT, GETUSERS, READTASK, SETNAMETASK, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
+import { GETCEO, GETDESCRIPTIONOFPROJECT, GETDEVELOPERS, GETDEVOPS, GETUSERS, READTASK, SETNAMETASK, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
 
 const start_login = () => {
   return {type: 'start_req'}
@@ -35,7 +35,7 @@ const stop_change =() =>{
   return{type: 'stop_change_status'}
 }
 
-
+//============Create user and login==================================
 export const reqlogin = (obj) => {
   return(dispatch) => {
     dispatch(start_login());
@@ -58,39 +58,39 @@ export const reqauth = (obj) => {
   return (dispatch) => {
     dispatch(start_login());
     axios({
-          method: "POST",
-          url: "http://localhost:8080/api/user",
-          data: {
-            name: obj.name,
-            email: obj.email,  
-            password: obj.password
-          }
-        })
-        .then (
-          (data) => dispatch(success_login()),
-          (err) => dispatch(err_login(err))
-        )
-  }  
+      method: "POST",
+      url: "http://localhost:8080/api/user",
+      data: {
+        name: obj.name,
+        email: obj.email,  
+        password: obj.password,
+        proffetion: obj.proffetion
+      }
+    })
+  .then (
+    (data) => dispatch(success_login()),
+    (err) => dispatch(err_login(err))
+  )}  
 }
+//============Create user and login==================================
 
+//============Projects==================================
 export const reqcreateProject = (obj) => {
-      return (dispatch) => {
-          axios({
-            method: "POST",
-            url: "http://localhost:8080/api/project",
-            data: {
-              name: obj.name_of_project,
-              user: obj.email,
-              description: obj.descrip 
-            }
-          })
-          .then (
-            dispatch(success_create()),
-            (err) => dispatch(err_create(err))
-          )}
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/project",
+      data: {
+        name: obj.name_of_project,
+        user: obj.email,
+        description: obj.descrip 
+      }
+    })
+    .then (
+      dispatch(success_create()),
+      (err) => dispatch(err_create(err))
+    )}
 }
-
-
 export const reqDeleteProject = (name_project, email) => {
   return (dispatch) => {
     console.log('action ----'+name_project, email)
@@ -105,45 +105,42 @@ export const reqDeleteProject = (name_project, email) => {
     )
   }
 }
-
-
 export const reqsettimeproject = (obj) => {
-      return (dispatch) => {
-          axios({
-            method: "POST",
-            url: "http://localhost:8080/api/tracker",
-            data: {
-              nameProject: obj.nameProject,     
-              workTime: obj.workTime
-            }
-           })
-           .then (
-             dispatch(success_create()),
-             (err) => dispatch(err_create(err))
-          )}
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/tracker",
+      data: {
+        nameProject: obj.nameProject,     
+        workTime: obj.workTime
+      }
+     })
+     .then (
+       dispatch(success_create()),
+       (err) => dispatch(err_create(err))
+    )}
 }
 
 export const notcreate = () => {
-      return(dispatch) => {
-        dispatch(err_create())
-      }
+  return(dispatch) => {
+    dispatch(err_create())
+  }
 }
-
 export const reqsetproject = (obj) => {
-      return (dispatch) => {
-        axios({
-          method: "POST",
-          url: "http://localhost:8080/api/allproj",
-          data: {email: obj.email}
-        })
-        .then((res) => {
-          dispatch({type: SETPROJECT, payload: res.data})
-        }) 
-      }
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/allproj",
+      data: {email: obj.email}
+    })
+    .then((res) => {
+      dispatch({type: SETPROJECT, payload: res.data})
+    }) 
+  }
 }
+//============Projects==================================
 
-
-
+//===========GetUsers==============================================
 export const reqGetAllUsers = () =>{
   return(dispatch) => {
     axios({
@@ -155,7 +152,45 @@ export const reqGetAllUsers = () =>{
     })
   }
 }
+export const reqGetAllCEO = (ceo) =>{
+  return(dispatch) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/allceo",
+      data:{ceo:ceo}
+    })
+    .then((res) => {
+      dispatch({type: GETCEO, payload: res.data})
+    })
+  }
+}
+export const reqGetAllDevOps = (devops) =>{
+  return(dispatch) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/alldevops",
+      data:{devops:devops}
+    })
+    .then((res) => {
+      dispatch({type: GETDEVOPS, payload: res.data})
+    })
+  }
+}
+export const reqGetAllDevelopers = (developer) =>{
+  return(dispatch) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/alldevelopers",
+      data:{developer:developer}
+    })
+    .then((res) => {
+      dispatch({type: GETDEVELOPERS, payload: res.data})
+    })
+  }
+}
+//===========GetUsers==============================================
 
+//===========Tasks and Status of task==============================================
 export const reqcreatetask = (obj) => {
   return(dispatch) => {
     axios({
@@ -169,8 +204,6 @@ export const reqcreatetask = (obj) => {
    )
   }
 }
-
-
 export const reqreadtask = (readedTasks) => {
   return (dispatch) => {
       axios({
@@ -183,20 +216,6 @@ export const reqreadtask = (readedTasks) => {
       })
   }
 }
-
-// export const reqGetDescription = (name_of_project, owner) => {
-//   return (dispatch) => {
-//     axios({
-//       method: "POST",
-//       url: "http://localhost:8080/api/descriptionproject",
-//      data: {name: name_of_project, owner: owner}
-//     })
-//     .then((res) => {
-//       dispatch({type: GETDESCRIPTIONOFPROJECT, payload: res.data})
-//     })
-//   }
-// }
-
 export const reqreadplannedTaskF= (readplannedTask, readedTasks) =>{
   return(dispatch)=>{
     axios({
@@ -230,9 +249,7 @@ export const reqreadDoneTaskF= (readDoneTask, readedTasks) =>{
     .then((res) => {dispatch({type:SET_DONE_TASK, payload: res.data})})
   }
 }
-
-export const reqchangeStatus =  (id, changedStatus) =>{
-  
+export const reqchangeStatus =  (id, changedStatus) =>{ 
   return(dispatch) => {
     console.log('reqchange ==='+ id+'/'+ changedStatus)
     axios({
@@ -246,13 +263,11 @@ export const reqchangeStatus =  (id, changedStatus) =>{
    )
   }
 }
-
 export const stopChange = () => {
   return(dispatch) => {
     dispatch(stop_change())
   }
 }
-
 export const deleteTask = (id) =>{
   return (dispatch) => {
     console.log(id)
@@ -267,3 +282,4 @@ export const deleteTask = (id) =>{
    )
   }
 }
+//===========Tasks and Status of task==============================================
