@@ -14,7 +14,6 @@ const mapStateToProps = (state) => {
     store: state.reducer.success
   }
 };
-
  function Create(){
   const dispatch = useDispatch()
   const history = useHistory();
@@ -40,7 +39,6 @@ const mapStateToProps = (state) => {
      dispatch(reqcreateProject(obj))
    }
   }
-
   return (
     <div>      
       <div style ={{textAlign: 'center'}}>Create new project</div>

@@ -40,7 +40,7 @@ function Auth(){
   const proffetion = useSelector((state) => state.setAuth.proffetion)
 
   const obj = {email: email, password: password, name: name, proffetion: proffetion}
-  console.log(obj)
+
 
   useEffect(() => {
     if(state.reducer.success){
@@ -56,7 +56,7 @@ function Auth(){
       dispatch(reqauth(obj))
     }
   }
-  console.log(proffetion)
+
 
   return (
     <div className = "container123321">
@@ -97,13 +97,11 @@ function Auth(){
       </Form.Select>
       </Form.Group>
 
-      
-      
       <Form.Group  className="mb-3" id="formGridCheckbox">
         <Form.Check type="checkbox" label="I agree with the terms of use" onChange = {handleDispatch}/>
       </Form.Group>
 
-      <Button variant="primary" onClick ={handleSub} >Sign up</Button>
+      <Button variant="primary" onClick ={handleSub}>Sign up</Button>
     
      </div>
     <div className = 'ee'><img src = {f11}/></div>

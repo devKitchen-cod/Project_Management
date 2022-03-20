@@ -5,8 +5,8 @@
   grid-template-columns: repeat(5 1fr);
   grid-template-areas: 
   'v p p clc .'
-  'l p p clc .'
-  '. . . . .';
+  'v p p clc .'
+  'v . . . .';
   /* background-color: blue; */
   height: 100vh;
   
@@ -14,7 +14,6 @@
 .create-btn{
   grid-area: l;
   margin-left: 2em;
-
 }
 
 .project-container{
@@ -37,7 +36,7 @@
   grid-area: a;
 }
 .v{
-  /* border: 3px solid blueviolet; */
+  border: 3px solid blueviolet;
   grid-area: v;
   height: 56px ;
   display: block;
@@ -57,7 +56,9 @@
 }
 
 .form1{
+  border: 3px solid blueviolet;
   margin: 2em;
+  width: 6em;
 }
 .form2{
   margin: 2em;
@@ -65,4 +66,7 @@
 
 .accord{
   margin: 2em;
+}
+.btnGroup{
+  display: block;
 }

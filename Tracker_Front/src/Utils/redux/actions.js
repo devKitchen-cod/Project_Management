@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GETCEO, GETDESCRIPTIONOFPROJECT, GETDEVELOPERS, GETDEVOPS, GETUSERS, READTASK, SETNAMETASK, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
+import { GETCEO, GETDESCRIPTIONOFPROJECT, GETDEVELOPERS, GETDEVOPS, GETUSERS, LOGIN, READTASK, SETEMAIL, SETNAME, SETNAMETASK, SETPASSWORD, SETPROFFETION, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
 
 const start_login = () => {
   return {type: 'start_req'}
@@ -36,6 +36,27 @@ const stop_change =() =>{
 }
 
 //============Create user and login==================================
+
+export const reqChekToken = (token) => {
+  return(dispatch) => {
+    
+    axios.post(
+      "http://localhost:8080/api/checktoken",
+      {},
+      { headers: { authorization: token } }
+    ) .then((res) => {
+        localStorage.setItem('token', res.data.token);
+        dispatch({type: LOGIN, payload: true})   
+        dispatch({type: SETEMAIL, payload: res.data.email})
+        dispatch({type: SETNAME, payload: res.data.name})
+        dispatch({type: SETPASSWORD, payload: res.data.password})
+        dispatch({type: SETPROFFETION, payload: res.data.proffetion})       
+    }) 
+  
+  }
+}
+
+
 export const reqlogin = (obj) => {
   return(dispatch) => {
     dispatch(start_login());
@@ -45,15 +66,17 @@ export const reqlogin = (obj) => {
       data: {
         email: obj.email,
         password: obj.password
-      }
+      } 
+      
     })
-    .then(
-      (data) => dispatch(success_login()),
-      (err) => dispatch(err_login(err))
-    )
+    .then((res) => {
+      localStorage.setItem('token', res.data.token);
+      dispatch(success_login())
+      dispatch(err_login())
+    })
   }
 }
-
+//http://localhost:8080/
 export const reqauth = (obj) => {
   return (dispatch) => {
     dispatch(start_login());
@@ -69,7 +92,7 @@ export const reqauth = (obj) => {
     })
   .then (
     (data) => dispatch(success_login()),
-    (err) => dispatch(err_login(err))
+    () => dispatch(err_login())
   )}  
 }
 //============Create user and login==================================

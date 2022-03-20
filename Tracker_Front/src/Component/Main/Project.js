@@ -1,12 +1,13 @@
 
 import React, { useEffect, useState } from 'react'
-import {Accordion, Button, Card, Form, Modal} from 'react-bootstrap'
+import {Accordion, Button, ButtonGroup, Card, Dropdown, DropdownButton, Form, ListGroup, Modal, Nav} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { notcreate, reqcreateProject, reqDeleteProject, reqGetAllUsers, reqGetDescription, reqsetproject } from '../../Utils/redux/actions';
 import {  SETDESCRIPTIONOFPROJECT, SETIDPRO, SETNAMEOFPROJECT } from '../../Utils/redux/redux-types';
 import Chat from './Chat'
 import '../../Styles/styleProject.css'
+
 
 export default function Project(){  
  
@@ -22,17 +23,12 @@ export default function Project(){
 
   const obj = {email: email}
   const obj1 = {email: email, name_of_project: name_of_project, descrip: description_project}
-
-
   console.log(projects)
 
   useEffect(() => {
     dispatch(reqsetproject(obj))
     dispatch(reqGetAllUsers())
-    // dispatch(reqGetDescription(name_of_project, email))
     }, [state.reducer.deleted, state.reducer.created])
-  //useEffect(() => {dispatch(reqGetAllUsers())})
-
 
   useEffect(() =>{
     if(state.reducer.created || state.reducer.deleted){  
@@ -61,19 +57,29 @@ export default function Project(){
     history.push('/tracker')
    }
 
-
    const handle_Delete_Project=(name_project)=>{
      //DELETE PROJECT AND ALL TASKS OF PROJECT
      console.log(name_project, email)     
      alert(`Do you want delete project ${name_project} with all tasks?`)
      dispatch(reqDeleteProject(name_project, email))
    }
- 
-  
+   
+   const handle_project = () => {
+    history.push('/project')
+   }
+
+   const handle_users = () => {
+    history.push('/')
+  }
+
+  const handle_tracker = () => {
+    history.push('/tracker')
+  }
   return(  
     <div className = 'main-container111'> 
       <div className = 'v'>
-      <div className = 'form1'>
+        <div className = 'form1'>
+
         <Form.Group onChange = {e => dispatch({type:SETNAMEOFPROJECT, payload: e.target.value})}>
             <Form.Floating>
               <Form.Control id="floatingInputCustom" type="text" placeholder="name@example.com"/>
@@ -88,11 +94,19 @@ export default function Project(){
               <label htmlFor="floatingInputCustom">Deskription Project</label>
             </Form.Floating>
           </Form.Group>
-          </div>
-          <Button className = 'create-btn' onClick={handleSubmit}>Create!</Button> 
+        </div>
+
+          {/* <Button className ='btnGroup' variant="light">Project</Button>
+          <Button className ='btnGroup' variant="light">Users</Button>
+          <Button className ='btnGroup' variant="light">Tracker</Button>
+          <DropdownButton  title="Dropdown" id="bg-vertical-dropdown-2">
+            <Dropdown.Item eventKey="1">Settings</Dropdown.Item>
+          </DropdownButton> */}
+        
+        
+           <Button className = 'create-btn' onClick={handleSubmit}>Create!</Button>   
       </div>
 
-      
         <div className = 'chat-list-container'>
           <Chat />
         </div>
@@ -125,3 +139,6 @@ export default function Project(){
     </div>
   )
 } 
+
+
+

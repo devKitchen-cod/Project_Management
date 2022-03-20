@@ -21,6 +21,7 @@ const init_auth ={
   name: '',
   password: '',
   proffetion:'',
+
   ceo:[],
   devops:[],
   developer:[]
@@ -39,6 +40,7 @@ function Auth(state = init_auth, action){ //Auth
   case SETPROFFETION:{
     return {...state, proffetion: action.payload}
   }
+  
   case GETCEO:{
     return {...state, ceo:action.payload}    
   }

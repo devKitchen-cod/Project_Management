@@ -2,12 +2,10 @@
 import React from "react"
 import {Button, ButtonGroup, Card, Col, Container, Row } from "react-bootstrap"
 
-import '../Styles/styleStartPage.css'
-
-
-import f7 from '../Styles/img/f7.svg'
-import f8 from '../Styles/img/f8.svg'
-import f10 from '../Styles/img/f10.jpg'
+import '../../Styles/styleStartPage.css'
+import f7 from '../../Styles/img/f7.svg'
+import f8 from '../../Styles/img/f8.svg'
+import f10 from '../../Styles/img/f10.jpg'
 
 
 

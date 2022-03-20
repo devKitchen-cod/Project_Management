@@ -18,6 +18,7 @@ router.post('/task-change-status', taskConstroller.changeStatusTask)
 router.post('/task-delete-task', taskConstroller.deleteTasks)
 
 
+router.post('/checktoken', userController.VerifyToken)
 router.post('/task-create', taskConstroller.createTask)
 router.post('/task-read', taskConstroller.readTask)
 router.post('/user', userController.createUser)

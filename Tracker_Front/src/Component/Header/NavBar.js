@@ -12,6 +12,10 @@ export default function NavBar(){
   const history = useHistory();
   const email = useSelector((state) => state.setAuth.email)
   let auth = useSelector((state) => state.enter.isAuth)
+  const handle_logout =() =>{
+    localStorage.setItem('token', null)
+    window.location.replace("/")
+  }
 
   return(
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -27,7 +31,7 @@ export default function NavBar(){
 
                     <Nav>
                     <Nav.Link onClick={() => history.push('/project')}>{email}</Nav.Link>
-                    <Nav.Link onClick={() => window.location.replace("/")}>Logout</Nav.Link>
+                    <Nav.Link onClick={() => handle_logout()}>Logout</Nav.Link>
                     </Nav>  
                     </>                    
                    ):(
