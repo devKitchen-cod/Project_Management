@@ -1,0 +1,32 @@
+/* .container111{
+  display: inline-flex;
+} */
+.tab1{
+  /* display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: ". . . . . "; */
+}
+
+/* .card12{
+  display: inline-flex;
+} */
+
+
+.tab-plan{
+ /* grid-area: f; */
+ margin: 20px 50px 20px 50px;
+}
+/* width: '18rem', margin:'20px' */
+
+.footer{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: ". af af . fa ";
+}
+
+.btn{ 
+  grid-area: fa;
+}
+.pro{
+  grid-area: af;
+}

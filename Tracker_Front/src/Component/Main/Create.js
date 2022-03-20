@@ -1,21 +1,19 @@
+
 import React, { useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-
 import { SETNAMEOFPROJECT } from '../../Utils/redux/redux-types';
-import { notcreate, reqcreate } from '../../Utils/redux/actions';
-
+import { notcreate, reqcreateProject } from '../../Utils/redux/actions';
 
 const mapDispatchToProps = {
-  reqcreate,
+  reqcreateProject,
 };
 const mapStateToProps = (state) => {
   return {
     store: state.reducer.success
   }
 };
-
  function Create(){
   const dispatch = useDispatch()
   const history = useHistory();
@@ -38,13 +36,11 @@ const mapStateToProps = (state) => {
     alert('Fild the Form!');
    }
    else{
-     dispatch(reqcreate(obj))
+     dispatch(reqcreateProject(obj))
    }
   }
-
   return (
-    <div>
-      
+    <div>      
       <div style ={{textAlign: 'center'}}>Create new project</div>
          <div style = {{marginLeft: '600px', marginRight: '600px', marginTop: '100px' }}>
              <Form.Group onChange = {e => dispatch({type:SETNAMEOFPROJECT, payload: e.target.value})}>

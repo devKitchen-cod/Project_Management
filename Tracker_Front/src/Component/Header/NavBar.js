@@ -1,16 +1,21 @@
 import React, { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Nav, Navbar, Container, NavDropdown, Dropdown, Row, Col, Stack} from 'react-bootstrap/'
-import "./StyleHeader.css"
+
+import "../../Styles/styleHeader.css"
+
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
-import Auth2 from "../Main/Auth2";
-import AuthForm from "../Main/Auth2";
+
 
 export default function NavBar(){
   const history = useHistory();
   const email = useSelector((state) => state.setAuth.email)
   let auth = useSelector((state) => state.enter.isAuth)
+  const handle_logout =() =>{
+    localStorage.setItem('token', null)
+    window.location.replace("/")
+  }
 
   return(
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -21,15 +26,12 @@ export default function NavBar(){
                    {auth ? (
                      <>                     
                      <Nav className="me-auto">
-                      <Nav.Link onClick={() => history.push('/project')}>Projects</Nav.Link>
-                      <Nav.Link onClick={() => history.push('/tracker')}>Tracker</Nav.Link>
-                      <Nav.Link onClick={() => history.push('/create')}>Create</Nav.Link>
-                      <Nav.Link onClick={() => history.push('/story')}>Story</Nav.Link>
+                      <Nav.Link onClick={() => history.push('/project')}>Projects</Nav.Link>                                                            
                     </Nav>
 
                     <Nav>
-                    <Nav.Link onClick={() => history.push('/story')}>{email}</Nav.Link>
-                    <Nav.Link onClick={() => window.location.replace("/")}>Logout</Nav.Link>
+                    <Nav.Link onClick={() => history.push('/project')}>{email}</Nav.Link>
+                    <Nav.Link onClick={() => handle_logout()}>Logout</Nav.Link>
                     </Nav>  
                     </>                    
                    ):(

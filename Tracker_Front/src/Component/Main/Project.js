@@ -1,47 +1,144 @@
 
 import React, { useEffect, useState } from 'react'
-import {Button, Card} from 'react-bootstrap'
+import {Accordion, Button, ButtonGroup, Card, Dropdown, DropdownButton, Form, ListGroup, Modal, Nav} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { reqsetproject } from '../../Utils/redux/actions';
-import { SETIDPRO } from '../../Utils/redux/redux-types';
+import { notcreate, reqcreateProject, reqDeleteProject, reqGetAllUsers, reqGetDescription, reqsetproject } from '../../Utils/redux/actions';
+import {  SETDESCRIPTIONOFPROJECT, SETIDPRO, SETNAMEOFPROJECT } from '../../Utils/redux/redux-types';
+import Chat from './Chat'
+import '../../Styles/styleProject.css'
 
 
-
-export default function Project(){
+export default function Project(){  
+ 
   const dispatch = useDispatch();
   const history = useHistory()
-  const email = useSelector((state) => state.setAuth.email)
-  const obj = {email: email}
-  const projects = useSelector((state) => state.setProject.list_of_projects)
-  
-  useEffect(() => {dispatch(reqsetproject(obj))}, [])
+  const state = useSelector((state) => state)
 
-  const handle_vue  = (id) => {
-    console.log(id)
-    dispatch({type: SETIDPRO, payload: id})
+  const email = useSelector((state) => state.setAuth.email)
+  const projects = useSelector((state) => state.setProject.list_of_projects)
+  const name_of_project = useSelector((state) => state.setProject.name_of_project)
+  const description_project = useSelector((state) => state.setProject.descrip_project)
+  // const get_descrip_proj = useSelector((state) => state.setProject.get_descrip_proj)
+
+  const obj = {email: email}
+  const obj1 = {email: email, name_of_project: name_of_project, descrip: description_project}
+  console.log(projects)
+
+  useEffect(() => {
+    dispatch(reqsetproject(obj))
+    dispatch(reqGetAllUsers())
+    }, [state.reducer.deleted, state.reducer.created])
+
+  useEffect(() =>{
+    if(state.reducer.created || state.reducer.deleted){  
+      history.push('/project')
+      dispatch(notcreate())
+    }
+  })
+
+  const handle_view  = (name_project) => {    
+    dispatch({type: SETIDPRO, payload: name_project})
     history.push('/vue_project')
   }
 
-  return(
-    <div>
-      
-      {projects.map((item) =>(
-    <Card style ={{ margin: "100px", marginLeft:"300px", marginRight: "300px", color: ''}} bg="white">
-      <Card.Header as="h5">{item.name_project}</Card.Header>
-      <Card.Body>
-        <Card.Title>TIME: {item.current_time}</Card.Title>
-        
-        <Card.Text>
-          Description of Project
-        </Card.Text>  
-
-        <Button onClick = {() => handle_vue(item.name_project)}>View Project</Button>
-
-      </Card.Body>
-    </Card>
-    ))
+  const handleSubmit =  _event => {    
+    if (obj1.email, obj1.name_of_project === '', obj1.descrip === '') {
+     alert('Fild the Form!');
     }
+    else{
+      dispatch(reqcreateProject(obj1))
+    }
+   }
+
+   const handleGoToTracker = (selectedProject)=> {
+    console.log(selectedProject)
+    dispatch({type: SETNAMEOFPROJECT, payload: selectedProject})
+    history.push('/tracker')
+   }
+
+   const handle_Delete_Project=(name_project)=>{
+     //DELETE PROJECT AND ALL TASKS OF PROJECT
+     console.log(name_project, email)     
+     alert(`Do you want delete project ${name_project} with all tasks?`)
+     dispatch(reqDeleteProject(name_project, email))
+   }
+   
+   const handle_project = () => {
+    history.push('/project')
+   }
+
+   const handle_users = () => {
+    history.push('/')
+  }
+
+  const handle_tracker = () => {
+    history.push('/tracker')
+  }
+  return(  
+    <div className = 'main-container111'> 
+      <div className = 'v'>
+        <div className = 'form1'>
+
+        <Form.Group onChange = {e => dispatch({type:SETNAMEOFPROJECT, payload: e.target.value})}>
+            <Form.Floating>
+              <Form.Control id="floatingInputCustom" type="text" placeholder="name@example.com"/>
+              <label htmlFor="floatingInputCustom">Name Project</label>
+            </Form.Floating>
+          </Form.Group>
+          </div>
+          <div className ='form2'>
+          <Form.Group controlId="exampleForm.ControlTextarea1" onChange = {e => dispatch({type:SETDESCRIPTIONOFPROJECT, payload: e.target.value})}>
+            <Form.Floating>
+              <Form.Control as="textarea" id="floatingInputCustom" type="text" placeholder="name@example.com"/>
+              <label htmlFor="floatingInputCustom">Deskription Project</label>
+            </Form.Floating>
+          </Form.Group>
+        </div>
+
+          {/* <Button className ='btnGroup' variant="light">Project</Button>
+          <Button className ='btnGroup' variant="light">Users</Button>
+          <Button className ='btnGroup' variant="light">Tracker</Button>
+          <DropdownButton  title="Dropdown" id="bg-vertical-dropdown-2">
+            <Dropdown.Item eventKey="1">Settings</Dropdown.Item>
+          </DropdownButton> */}
+        
+        
+           <Button className = 'create-btn' onClick={handleSubmit}>Create!</Button>   
+      </div>
+
+        <div className = 'chat-list-container'>
+          <Chat />
+        </div>
+      
+        <div className = 'project-container'>
+          {projects.map((item, key) => (
+            <div className = 'item' key= {key}>
+              <Card bg = "white" >
+              <Card.Header><h3>{item.name_project}</h3></Card.Header>
+                <Card.Body>
+                  <Card.Text>Time of work on project: {item.current_time}</Card.Text>
+                  <div className = 'accord'>
+                  <Accordion defaultActiveKey="1">
+                   <Accordion.Item eventKey="0">
+                    <Accordion.Header>Description</Accordion.Header>
+                      <Accordion.Body>
+                        {item.description_project}
+                      </Accordion.Body>
+                   </Accordion.Item>
+                  </Accordion>
+                  </div>
+                  <Button onClick = {() => handle_view(item.name_project)}>View Project</Button>
+                  <div className='bt' onClick ={()=> handle_Delete_Project(item.name_project)}><Button variant = 'danger'>Delete Project</Button></div>
+                  <div className='bt' onClick = {() => handleGoToTracker(item.name_project)} ><Button variant = 'success'>Track</Button></div>
+                </Card.Body>          
+              </Card>
+            </div>
+          ))}
+        </div>
     </div>
   )
 } 
+
+
+

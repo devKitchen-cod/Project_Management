@@ -1,0 +1,72 @@
+
+.main-container111{
+  /* border: 3px solid red; */
+  display: grid;
+  grid-template-columns: repeat(5 1fr);
+  grid-template-areas: 
+  'v p p clc .'
+  'v p p clc .'
+  'v . . . .';
+  /* background-color: blue; */
+  height: 100vh;
+  
+}
+.create-btn{
+  grid-area: l;
+  margin-left: 2em;
+}
+
+.project-container{
+  /* border: 3px solid black; */
+  margin-top: 4em ;
+  margin-left: 2em;
+  grid-area: p;
+}
+.item{
+  justify-content: center;
+  /* margin: 20px; */
+    margin-bottom: 20px;
+}
+.bt{
+  display: inline;
+  margin-left: 10px;
+}
+.m{
+  
+  grid-area: a;
+}
+.v{
+  border: 3px solid blueviolet;
+  grid-area: v;
+  height: 56px ;
+  display: block;
+  margin-top: 3em;
+  margin-left: 2em;
+  
+  
+}
+.bh{
+  /* margin-right: 10px; */
+}
+.chat-list-container{
+  /* border: 3px solid green; */
+  grid-area: clc;
+  margin: 20px;
+  margin-top: 4em;
+}
+
+.form1{
+  border: 3px solid blueviolet;
+  margin: 2em;
+  width: 6em;
+}
+.form2{
+  margin: 2em;
+}
+
+.accord{
+  margin: 2em;
+}
+.btnGroup{
+  display: block;
+}

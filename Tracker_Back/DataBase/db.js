@@ -6,6 +6,14 @@
 // });
 // module.exports = sequelize
 
+// const Pool = require('pg').Pool
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// })
+
 const Pool = require('pg').Pool
 
  const pool = new Pool({
@@ -15,5 +23,4 @@ const Pool = require('pg').Pool
   password: '1',
   database: 'work_db' 
 })
-//pool.connect();
 module.exports = pool

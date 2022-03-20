@@ -1,16 +1,14 @@
 
 import React from "react"
 import {Button, ButtonGroup, Card, Col, Container, Row } from "react-bootstrap"
-import Carusel1 from "./StyledComponent/CaruselStart"
-import '../Styles/style.css'
-import f1 from '../Styles/img/f4.jpg'
-import f5 from '../Styles/img/f5.jpg'
-import f6 from '../Styles/img/f6.png'
-import f7 from '../Styles/img/f7.svg'
-import f8 from '../Styles/img/f8.svg'
-import f10 from '../Styles/img/f10.jpg'
 
-import Cards from "./StyledComponent/Cards"
+import '../../Styles/styleStartPage.css'
+import f7 from '../../Styles/img/f7.svg'
+import f8 from '../../Styles/img/f8.svg'
+import f10 from '../../Styles/img/f10.jpg'
+
+
+
 export default function StartPage(){
   
   return(
@@ -49,8 +47,10 @@ export default function StartPage(){
 
           </div>
           <img className = "time3" src = {f10}/>           
-          <div class="block-animation"></div>
+          {/* <div class="block-animation"></div> */}
         </div>
+
+
 
       </div>
  
