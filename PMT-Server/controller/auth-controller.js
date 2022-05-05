@@ -2,9 +2,7 @@
 const jwt = require('jsonwebtoken')
 const keys = require('../keys/key')
 
-const { createAccount, checkEmail, checkUser } = require('../DataBase/requests_on_db/auth/auth_req')
-const { getDataUser } = require('../DataBase/requests_on_db/data_getters/get_data_spr_users')
-
+const { createAccount, checkEmail, checkUser, getDataUser, deleteUser } = require('../DataBase/requests_on_db/auth/auth_req')
 
 module.exports.createUser = async function(req, res){
 
@@ -34,6 +32,43 @@ module.exports.createUser = async function(req, res){
       console.log(err);
     }
   }
+
+  module.exports.loginUser = async function(req, res){
+    console.log("login===============")
+    let loginPerson = {email: req.body.email, password: req.body.password}
+  
+    const verify_email = await checkEmail(loginPerson.email)
+    const verify_password = await checkPassword(loginPerson.password)
+  
+    let data_user = await getDataUser(loginPerson.email)
+    
+    try{
+      if(verify_email === true && verify_password === true){
+  
+      const token = jwt.sign({email: loginPerson.email, password: loginPerson.password}, keys.jwt, {expiresIn: 60 * 60 }) //create token
+      res.status(200).json({
+        token: token,
+        data_user: data_user
+       }) 
+    }}catch(err){console.log(err);}
+  }
+
+  module.exports.deleteUser = async (req, res) => {
+    console.log('DELETE === ')
+    let deletedUser = {email: req.body.email, password: req.body.password}
+    
+    let findUser = await checkEmail(deletedUser.email)
+    if(findUser === true){
+       let result = await deleteUser(deletedUser.email)
+       result? res.status(200).json({message: "Success Deleted!"}) : res.status(500).json({message: "Oops, ERROR"})
+    }else{
+      res.status(404).json({message: 'User not found'})
+    }
+  }
+
+
+
+
 
   module.exports.VerifyToken = async (req, res) =>{
     try{

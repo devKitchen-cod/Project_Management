@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const loginController = require('../controller/login-controller')
+const loginController = require('../controller/auth-controller')
 const userController = require('../controller/auth-controller')
 const trackcontroller = require('../controller/project-controller')
 const projController = require('../controller/projects-controller')

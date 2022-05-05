@@ -72,3 +72,35 @@ module.exports.checkPassword = async (data) => {
 }
 
 
+module.exports.getDataUser = async (data) => {
+  try {
+    let result = await Spr_Users.findAll({
+      attributes: ['name_user','email_user', 'password_user' ],
+      where: {
+        email_user: data
+      }, 
+      raw: true
+    })
+    console.log('result == ', result)
+    return result
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
+module.exports.deleteUser = async (data) => {
+  try {
+    await Spr_Users.destroy({
+      where: {
+        email_user: data
+      }, 
+      force: true
+    })
+    return true
+  } catch (error) {    
+    console.log(error)
+    return false
+  }
+}
+

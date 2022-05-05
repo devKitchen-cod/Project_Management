@@ -125,9 +125,17 @@ const Spr_Users = sequelize.define('Spr_Users', {
   email_user:{
     type: DataTypes.STRING,
     allowNull: true,
-  },
+  },  
   password_user:{
     type: DataTypes.STRING,
+    allowNull: true
+  },
+  double_auth_email_user: {
+    type: DataTypes.STRING,
+    allowNull: true 
+  },
+  phone_number_user: {
+    type: DataTypes.INTEGER,
     allowNull: true
   },
   first_name:{
