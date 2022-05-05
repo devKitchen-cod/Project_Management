@@ -3,64 +3,45 @@ import {Form, Row, Col, Button} from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { LOGIN, SETEMAIL, SETNAME, SETPASSWORD, SETPROFFETION } from '../../Utils/redux/redux-types';
-import { reqauth } from '../../Utils/redux/actions';
-
 import '../../Styles/styleAuth.css'
 import f11 from '../../Styles/img/f11.svg'
+import { auth, req_auth } from '../../store/operations/auth';
+import { ROUTES } from '../../constans/constans';
 
-const mapDispatchToProps = {
-  reqauth,
-};
-const mapStateToProps = (state) => {
-  return {
-    store: state.reducer.success
-  }
-};
-function Auth(){
+ export default function Auth(){
   const dispatch = useDispatch()
   const history = useHistory();
-  const state = useSelector((state) => state)
 
   const [stateEmail, setEmail] = useState("")
   const [statePassword, setPassword] = useState("")
   const [stateName, setName] = useState("")
-  const [stateProffetion, setProffetion] = useState("")
-
-
-  const handleDispatch = _event => {
-    dispatch({type: SETEMAIL, payload: stateEmail})
-    dispatch({type: SETPASSWORD, payload: statePassword})
-    dispatch({type: SETNAME, payload: stateName})
-    dispatch({type: SETPROFFETION, payload: stateProffetion})
-  }
-  const email = useSelector((state) => state.setAuth.email)
-  const password = useSelector((state) => state.setAuth.password)
-  const name = useSelector((state) => state.setAuth.name)
-  const proffetion = useSelector((state) => state.setAuth.proffetion)
-
-  const obj = {email: email, password: password, name: name, proffetion: proffetion}
-
+ 
+  const authenticate = useSelector((state) => state.Auth.authenticate)
+  const obj = {email: stateEmail, password: statePassword, name: stateName}
 
   useEffect(() => {
-    if(state.reducer.success){
-      alert('Authorization was successful!!!');
-      dispatch({type: LOGIN, payload: true })
-      history.push('/startp')
+    if(authenticate == true){
+      // alert('Authorization was successful!!!');            
+      history.push('/create_profiles_page') //Переход на создание профиля
     }
-  })
+  }, [authenticate])
+
   const handleSub = _event => {
-    if(obj.email, obj.password, obj.name, obj.proffetion === ''){
+    if(obj.email, obj.password, obj.name === ''){
       alert('fild form');
     }else{
-      dispatch(reqauth(obj))
+      dispatch(auth(obj, ROUTES.AUTH.SIGNUP)) //-----REQ
     }
   }
-
 
   return (
     <div className = "container123321">
       <div className = 'sub-container'>
+      
+      <Form.Group className="mb-3"  controlId="formGridAddress1" onChange= {e => setName(e.target.value)}>
+        <Form.Label>Name</Form.Label>
+       <Form.Control type="name" placeholder="Name" />
+      </Form.Group>
       
       <Form.Group className="mb-3"  as={Col} controlId="formGridEmail"  onChange = {e => setEmail(e.target.value)}>
         <Form.Label>Email</Form.Label>
@@ -72,33 +53,8 @@ function Auth(){
         <Form.Control type="password" placeholder="Password"/>
       </Form.Group>
 
-      <Form.Group className="mb-3"  controlId="formGridAddress1" onChange= {e => setName(e.target.value)}>
-        <Form.Label>Name</Form.Label>
-       <Form.Control type="name" placeholder="Name" />
-      </Form.Group>
-
-      <Form.Group className="mb-3"  controlId="formGridAddress2">
-        <Form.Label>Surname</Form.Label>
-        <Form.Control type="name" placeholder="Surname" />
-      </Form.Group>
-      
-      <Form.Group className="mb-3" as={Col} controlId="formGridCity">
-        <Form.Label>City</Form.Label>
-        <Form.Control type="city" placeholder="City"/>
-      </Form.Group>
-
-      <Form.Group className="mb-3" as={Col} controlId="formGridCity" onChange = {e => setProffetion(e.target.value)}>
-      <Form.Label>Proffetion</Form.Label>
-      <Form.Select >
-        <option >Choose Proffetion</option>
-        <option value="CEO">CEO</option>
-        <option value="DevOps">DevOps</option>
-        <option value="Developer">Developer</option>
-      </Form.Select>
-      </Form.Group>
-
       <Form.Group  className="mb-3" id="formGridCheckbox">
-        <Form.Check type="checkbox" label="I agree with the terms of use" onChange = {handleDispatch}/>
+        <Form.Check type="checkbox" label="I agree with the terms of use" />
       </Form.Group>
 
       <Button variant="primary" onClick ={handleSub}>Sign up</Button>
@@ -109,4 +65,3 @@ function Auth(){
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);

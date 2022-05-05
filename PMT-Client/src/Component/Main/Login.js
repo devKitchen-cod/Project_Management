@@ -6,46 +6,30 @@ import { LOGIN, SETEMAIL, SETPASSWORD } from '../../Utils/redux/redux-types'
 import { reqlogin } from '../../Utils/redux/actions';
 import f8 from '../../Styles/img/f8.svg'
 import '../../Styles/styleLogin.css'
+import { login } from '../../store/operations/auth';
+import { ROUTES } from '../../constans/constans';
    
-const mapDispatchToProps = {
-  reqlogin,
-};
-const mapStateToProps = (state) => {
-  return {
-    store: state.reducer.success
-  }
-};
-
- function LogForm(){ 
+export default function LogForm(){ 
   const dispatch = useDispatch()
   const history = useHistory();
   
   const [stateEmail, setEmail] = useState("")
   const [statePassword, setPassword] = useState("")
 
-  const state = useSelector((state) => state)
-  const email = useSelector((state) => state.setAuth.email)
-  const password = useSelector((state) => state.setAuth.password)
-  
-  const obj = {email: email, password: password}
-
-  const handleDispatch = _event => {
-  dispatch({type: SETEMAIL, payload: stateEmail})
-  dispatch({type: SETPASSWORD, payload: statePassword})
-}
+  const authenticate = useSelector((state) => state.Auth.authenticate)
+  const obj = {email: stateEmail, password: statePassword}
 
   useEffect(() => {
-    if(state.reducer.success){
-      dispatch({type: LOGIN, payload: true })
-      history.push('/startp') 
+    if(authenticate == true){            
+      history.push('/startp') //...переход по определенному профилю для пользователя 
     }
-  }, [state.reducer.success])
+  }, [authenticate])
 
   const handlesub = _event => {
     if(obj.email, obj.password === ''){
       alert('fild form');
     }else{
-    dispatch(reqlogin(obj))
+    dispatch(login(obj, ROUTES.AUTH.LOGIN)) //----REQ 
     }  
   }
 
@@ -62,17 +46,16 @@ const mapStateToProps = (state) => {
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email"/>
             <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
-          </Form.Group>
-          
+          </Form.Group>          
 
           <Form.Group className="mb-3" controlId="formBasicPassword" onChange = {e => setPassword(e.target.value)}>
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password"/>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="I agree"  onChange ={handleDispatch}/>
-          </Form.Group>
+          </Form.Group> */}
 
           <Button variant="primary" onClick={handlesub}>Sign in</Button>
           </div>
@@ -82,5 +65,5 @@ const mapStateToProps = (state) => {
       )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogForm);
+
 

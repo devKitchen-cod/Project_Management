@@ -6,7 +6,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=1
       - POSTGRES_USER=sergey1
-      - POSTGRES_DB=work_db
+      - POSTGRES_DB=pmt-db
     volumes:
       - ./Docker_Postgre:/var/lib/postgresql/data
     ports:

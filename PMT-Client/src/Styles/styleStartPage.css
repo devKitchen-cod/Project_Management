@@ -1,5 +1,7 @@
+
 /* ==============introSection=================== */
-.mainContainer{
+
+.start-page-container{
   /* border: solid 5px greenyellow; */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -7,12 +9,13 @@
   grid-template-areas: 
   ". intro intro intro ."
   ". body body body ."
-  ". body2 body2 body2 .";
+  ". body2 body2 body2 ."
+  ;
 }
 
-.introSection{
+.intro-section{
   /* border: solid 5px black; */
-  margin-top: 6em;
+  margin-top: 3em;
   grid-area: intro;
   
   display: grid;
@@ -21,20 +24,19 @@
   grid-template-areas: 
   " sec1 sec1 img ";
 }
-.section1{
+
+.intro-content{
   /* border: solid 5px red; */
   grid-area: sec1;
-  align-self: flex-start;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   grid-template-areas: 
   "textg textg textg "
-  "btngroup btngroup . "
-  
+  "btngroup btngroup . "  
   ;
 }
-.textgroup{
+
+.intro-text-group{
   grid-area: textg;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -42,18 +44,20 @@
                         "text text text"
   ;
 }
-h1{ 
+
+.intro-h{ 
   grid-area: title ;
 }
-p{
+.intro-p{
   margin: 1em;
   grid-area: text ;
   font-size: 1.3em;
-} 
-.btngroup{  
+}
+
+.intro-btn{  
   grid-area: btngroup;
   /* border: solid 5px slateblue; */
-  display: inline-flex;
+  
 }
 .signin {
   margin: 1em;
@@ -61,32 +65,35 @@ p{
 .signup{
   margin: 1em;
 }
-.timeimg{
+.img1{
   /* border: solid 5px slateblue; */
   grid-area: img;
   height: 20em;
-  width: 35em;  
+  width: 30em;  
 }
 
-/* ==============bodySection=================== */
-.bodySection{
+/* ==============team-section=================== */
+.team-section{
   /* border: solid 5px slateblue; */
+  margin-top: 3em;
   grid-area: body;
-  /* margin-top: 3em; */
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  grid-template-rows: auto;
   grid-template-areas: 
   ". e e"
-  "tr r r";
- 
+  "tr r r"
+  ; 
 }
-.textb{
+.team-text-group{
   /* border: solid 5px blue; */
- grid-area: r; 
- /* display: inline-flex; */
+  grid-area: r; 
+  
 }
-.track{
+.team-btn{
+  margin-top: 3em;
+  margin-left: 35em;
+}
+.img2{
   /* border: solid 5px red; */
   grid-area: tr;
   height: 20em;
@@ -96,13 +103,81 @@ h2{
   grid-area: e;
 }
 
-/* ==============bodySection2=================== */
+/* ==============func-section=================== */
 
-.bodySection2{
-  margin-top: 6em;
+.func-section{
+  /* border: solid 5px blue; */
+  margin-top: 3em;
   grid-area: body2;
-}
-.time3{
-  margin-left: 25em;
+  
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-areas: 
+  " func-text func-text func-img "; 
 }
 
+.func-content{
+  
+  grid-area: func-text;  
+}
+.func-btn{
+  margin-top: 3em;
+  margin-left: 1em;
+}
+
+.img3{
+  /* border: solid 5px green; */
+  grid-area: func-img;
+  height: 20em;
+  width: 35em;
+  
+}
+
+@media screen and (max-width: 1890px) {
+  .team-btn{
+    margin-left: 25em;
+  }
+}
+
+
+@media screen and (max-width: 376px) {
+  
+  .start-page-container{
+    /* border: solid 5px greenyellow; */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "intro intro intro intro intro"
+    "body body body body body"
+    ". body2 body2 body2 ."
+    ;
+  }
+
+  .intro-section{
+      border: solid 5px greenyellow;
+    margin-top: 3em;
+    grid-area: intro;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    
+    grid-template-areas: 
+    "sec1 sec1 sec1"
+    "img img img "
+    ;
+  } 
+
+  .team-section{
+    margin-top: 3em;
+    grid-area: body;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-areas: 
+    "e e e"
+    "r r r"
+    "tr tr tr"
+    ; 
+  }
+  
+  
+}

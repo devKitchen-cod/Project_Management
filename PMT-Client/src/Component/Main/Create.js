@@ -1,4 +1,4 @@
-
+ 
 import React, { useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { connect, useDispatch, useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 };
  function Create(){
   const dispatch = useDispatch()
-  const history = useHistory();
+  const history = useHistory()
   const state = useSelector((state) => state)
 
   const email = useSelector((state) => state.setAuth.email)
@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
    else{
      dispatch(reqcreateProject(obj))
    }
-  }
+  bdb}
   return (
     <div>      
       <div style ={{textAlign: 'center'}}>Create new project</div>

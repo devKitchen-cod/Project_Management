@@ -1,0 +1,54 @@
+
+.profiles-container{
+  /* border: solid 5px slateblue; */
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  grid-template-areas: 
+  " . header header header . "
+  " . cards cards cards . "
+  " . . . . . "
+  ;
+}
+
+.hello-section{
+  grid-area: header;
+  /* border: solid 5px red; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: ". text text text .";
+}
+
+.profile-text-group{
+  
+  /* border: solid 5px red; */
+  grid-area: text;
+  text-align: center;
+}
+.profile-h{
+  margin-top: 2em;
+}
+.profile-p{
+  margin-top: 2em;
+}
+
+.cards-section{
+  grid-area: cards;
+  margin-top: 3em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: " dev . pm ";
+}
+
+.dev-card{
+  grid-area: dev;
+}
+
+.pm-card{
+  grid-area: pm;
+}
+
+
+
+
+
+

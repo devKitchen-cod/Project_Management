@@ -1,0 +1,32 @@
+
+.footer{
+  /* padding-top: 3em; */
+  /* border: solid 5px slateblue; */
+  
+  
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+
+  /* background-color:aqua; */
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-areas: 
+  " . content content . ";
+}
+
+.content{
+  grid-area: content;  
+  /* border: solid 5px slateblue; */
+  display: inline-block;
+  /* margin-left: 20em; */
+  text-align: center;
+}
+li{
+  text-decoration: none;
+  display: inline-block;
+  margin: 1em;
+  /* border: solid 5px slateblue; */
+
+
+}

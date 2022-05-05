@@ -1,0 +1,21 @@
+//User - AUTH
+export const USER_AUTH_REQUEST = 'USER_AUTH_REQUEST';
+export const USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS';
+export const USER_AUTH_ERROR = 'USER_AUTH_ERROR';
+export const USER_LOGOUT = 'LOGOUT'
+export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
+//Edit user data for creating profile 
+export const EDIT_DATA_USER_SUCCESS = 'EDIT_DATA_USER_SUCCESS';
+export const EDIT_DATA_USER_ERROR = 'EDIT_DATA_USER_ERROR';
+export const GET_EDITED_DATA = 'GET_EDITED_DATA';
+
+//Profile - Creating
+export const GET_PROFILE_AUTH_SUCCESS = 'GET_PROFILE_AUTH_SUCCESS';
+export const GET_PROFILE_AUTH_ERROR = 'GET_PROFILE_AUTH_ERROR';
+
+
+
+
+

@@ -8,6 +8,8 @@ const projController = require('../controller/projects-controller')
 const taskConstroller = require('../controller/task-controller')
 const deleteProject = require('../controller/project-controller')
 
+const test_controller = require('../controller/test')
+
 router.post('/delete-project', deleteProject.deleteProject)
 
 router.post('/task-read', taskConstroller.readTask)
@@ -31,5 +33,8 @@ router.post('/allusers', projController.getUsers)
 router.post('/allceo', projController.getAllCEO)
 router.post('/alldevops', projController.getALLDevOps)
 router.post('/alldevelopers', projController.getALLDevelopers)
+
+//test
+router.get('/test-route', test_controller.findUsers)
 
 module.exports = router

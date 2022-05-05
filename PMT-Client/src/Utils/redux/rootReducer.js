@@ -4,18 +4,20 @@ import { combineReducers } from "redux"
 const init = {
   isAuth: false
 }
-function Login(state = init, action){ //login
+export function Login(state = init, action){ //login
   switch (action.type) {
     case LOGIN:{     
       return {...state, isAuth: action.payload}
     }
     case LOGOUT:{
       const user = action.playload
-      return[...state, user]
+      return[...state, user] 
     }  
     default:return state 
   }
 }
+
+
 const init_auth ={
   email: '',
   name: '',
@@ -26,7 +28,7 @@ const init_auth ={
   devops:[],
   developer:[]
 }
-function Auth(state = init_auth, action){ //Auth
+export function Auth1(state = init_auth, action){ //Auth
   switch(action.type){
     case SETEMAIL:{
       return {...state, email: action.payload}
@@ -63,7 +65,7 @@ const init_name_of_project = { //project
   descrip_project: '',
   get_descrip_proj: ''
 }
-function Project( state = init_name_of_project, action){
+export function Project( state = init_name_of_project, action){
   switch(action.type){
     case SETNAMEOFPROJECT: {
       return {...state, name_of_project: action.payload}
@@ -108,7 +110,7 @@ const init_task = {
   done:[],
   changed_task: ''
 }
-function Task(state = init_task, action){  //task
+export function Task(state = init_task, action){  //task
   switch(action.type){
     case SETNAMETASK:{
       return {...state, nameTask: action.payload}
@@ -168,7 +170,7 @@ const initialState = {
 
   
 };
-const Flags = (state = initialState, action) => { //true/false flags
+export const Flags = (state = initialState, action) => { //true/false flags
   switch (action.type) {
     case 'start_req':
       return {
@@ -219,12 +221,3 @@ const Flags = (state = initialState, action) => { //true/false flags
   
 
 
-export const rootReducer = combineReducers({
-  enter: Login,
-  setAuth: Auth,
-  setProject: Project,
-  setTask: Task,
-  reducer: Flags,
-  
-  
-})

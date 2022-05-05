@@ -1,0 +1,43 @@
+.pm-container{
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  grid-template-areas: 
+  "img1 . reg reg . img2"
+  
+  ;
+}
+
+.reg-section{
+  margin-top: 3em;
+  
+  /* border: solid 5px slateblue; */
+  grid-area: reg;
+}
+.reg-logo{
+  text-align: center;
+}
+.reg-text{
+  margin-top: 1em;
+  text-align: center;
+}
+.reg-form{
+  margin-top: 3em;
+}
+
+.img-section1{
+  /* margin-right: 5em; */
+  margin-top: 20em;
+  grid-area: img1;
+  height: 560px;
+  width: 420px;
+
+}
+
+.img-section2{
+  grid-area: img2;
+}
+
+.create-profile-btn{
+
+  grid-area: tbn;
+}

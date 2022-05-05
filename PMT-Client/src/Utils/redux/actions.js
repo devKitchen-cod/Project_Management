@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { user_success_auth } from '../../store/actions/auth'
 import { GETCEO, GETDESCRIPTIONOFPROJECT, GETDEVELOPERS, GETDEVOPS, GETUSERS, LOGIN, READTASK, SETEMAIL, SETNAME, SETNAMETASK, SETPASSWORD, SETPROFFETION, SETPROJECT, SET_DONE_TASK, SET_INPROGRESS_TASK, SET_PLANNED_TASK } from './redux-types'
 
 const start_login = () => {
@@ -17,7 +18,7 @@ const success_create = () =>{
   return{type: 'success_create'}
 }
 
-const err_create = () => {
+const err_create = () => { 
   return {type: 'err_create'}
 }
 const deleted = () => {
@@ -51,8 +52,7 @@ export const reqChekToken = (token) => {
         dispatch({type: SETNAME, payload: res.data.name})
         dispatch({type: SETPASSWORD, payload: res.data.password})
         dispatch({type: SETPROFFETION, payload: res.data.proffetion})       
-    }) 
-  
+    })  
   }
 }
 
@@ -87,11 +87,13 @@ export const reqauth = (obj) => {
         name: obj.name,
         email: obj.email,  
         password: obj.password,
-        proffetion: obj.proffetion
+        
       }
     })
   .then (
-    (data) => dispatch(success_login()),
+    // user_auth_syccess
+    // (data) => dispatch(success_login()),
+    (data) => dispatch(user_success_auth(data)),
     () => dispatch(err_login())
   )}  
 }
