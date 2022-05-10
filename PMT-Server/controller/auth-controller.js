@@ -1,8 +1,6 @@
-
 const jwt = require('jsonwebtoken')
 const keys = require('../keys/key')
-
-const { createAccount, checkEmail, checkUser, getDataUser, deleteUser } = require('../DataBase/requests_on_db/auth/auth_req')
+const { createAccount, checkEmail, getDataAccount, deleteAccount, updateAccount } = require('../DataBase/requests_on_db/auth/auth_req')
 
 module.exports.createUser = async function(req, res){
 
@@ -15,7 +13,7 @@ module.exports.createUser = async function(req, res){
         console.log('Console')       
         let success_creating = await createAccount(newPerson) // ----req
 
-        let data_user = await getDataUser(newPerson.email) 
+        let data_user = await getDataAccount(newPerson.email) 
           console.log('789789',data_user)
         let token = null 
         success_creating? (token = jwt.sign({email: newPerson.email, name:newPerson.name, password: newPerson.password}, keys.jwt, {expiresIn: 60 * 60 }))//, proffetion: newPerson.proffetion
@@ -40,7 +38,7 @@ module.exports.createUser = async function(req, res){
     const verify_email = await checkEmail(loginPerson.email)
     const verify_password = await checkPassword(loginPerson.password)
   
-    let data_user = await getDataUser(loginPerson.email)
+    let data_user = await getDataAccount(loginPerson.email)
     
     try{
       if(verify_email === true && verify_password === true){
@@ -53,21 +51,30 @@ module.exports.createUser = async function(req, res){
     }}catch(err){console.log(err);}
   }
 
-  module.exports.deleteUser = async (req, res) => {
+  module.exports.deleteAccount = async (req, res) => {
     console.log('DELETE === ')
-    let deletedUser = {email: req.body.email, password: req.body.password}
+    let deletedAccount = {email: req.body.email, password: req.body.password}
     
-    let findUser = await checkEmail(deletedUser.email)
+    let findUser = await checkEmail(deletedAccount.email)
     if(findUser === true){
-       let result = await deleteUser(deletedUser.email)
+       let result = await deleteAccount(deletedUser.email)
        result? res.status(200).json({message: "Success Deleted!"}) : res.status(500).json({message: "Oops, ERROR"})
     }else{
       res.status(404).json({message: 'User not found'})
     }
   }
-
-
-
+  module.exports.updateUser = async (req, res) => {
+    console.log('UPDATE === ')
+    let updatedAccount = {name: req.body.name, email: req.body.email, password: req.body.password, id: req.body.id}
+    try {  
+      let result =  await updateAccount(updatedAccount)
+      result? res.status(200).json({message: 'Success'}):res.status(404).json({message: 'Error'}) 
+    } catch (error) {
+      
+      console.log(error)
+      res.status(500).json({message: 'Server Error'})
+    }
+  }
 
 
   module.exports.VerifyToken = async (req, res) =>{
@@ -86,8 +93,6 @@ module.exports.createUser = async function(req, res){
       (res.status(404).json({ message: 'User is not found' }))
     }catch(err){console.log(err), res.status(404).json({ message: 'This user does not exist'})} //,  
   }
-
-
 
  const decodeToken = async function(req,res){
     const result = await req
