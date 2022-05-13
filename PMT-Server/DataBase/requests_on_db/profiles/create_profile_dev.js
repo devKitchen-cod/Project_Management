@@ -2,7 +2,20 @@ const { Profile_Devs } = require("../../connecting_db")
 
 
 //getters for developer profile
-
+module.exports.get_all_data_dev_profile = async (data) => {
+  
+  try {
+    let result = await Profile_Devs.findAll({
+      where: {
+        ID_Dev_Profile: data.id
+      }
+    })
+    return result
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 //CRUD for developer profile

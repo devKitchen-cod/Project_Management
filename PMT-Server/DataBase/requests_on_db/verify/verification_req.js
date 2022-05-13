@@ -1,6 +1,9 @@
 const { Spr_Users } = require("../../connecting_db")
 
 
+
+
+
 module.exports.isVerification = async (data) => {
   try {
     let result = Spr_Users.findAll({
