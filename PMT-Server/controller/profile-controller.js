@@ -14,7 +14,7 @@ module.exports.get_sub_info_dev = async (data) => {
     if (result_directions, result_levels === false){
       res.status(500).jsone({messege: 'Error'})
     }
-    if(result_directions.length == 0){
+    if(result_directions.length == 0){ 
       res.status(200).json({messege: 'Directions are empty'})
     }else{
       res.status(200).json({

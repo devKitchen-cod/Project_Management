@@ -1,9 +1,5 @@
 const { Spr_Users } = require("../../connecting_db")
 
-
-
-
-
 module.exports.isVerification = async (data) => {
   try {
     let result = Spr_Users.findAll({
@@ -20,5 +16,21 @@ module.exports.isVerification = async (data) => {
     }
   } catch (error) {
     console.log(error)
+  }
+}
+
+module.exports.verify_account = async (data) => {  
+  try {
+    await Spr_Users.update({
+      is_verify: true      
+    }, {
+      where: {
+        ID_User: data
+      }
+    })
+    return true
+  } catch (error) {
+    console.log(error)
+    return false
   }
 }

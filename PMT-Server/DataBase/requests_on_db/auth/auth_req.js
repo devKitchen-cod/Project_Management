@@ -6,7 +6,9 @@ module.exports.createAccount = async (data) => {
       name_user: data.name,
       email_user: data.email,
       password_user: data.password,
-      role_user: data.role_user
+      role_user: data.role_user,
+      is_verify: false
+
      })
     
     return true

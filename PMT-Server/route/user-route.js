@@ -9,7 +9,7 @@ const taskConstroller = require('../controller/task-controller')
 const deleteProject = require('../controller/project-controller')
 
 const test_controller = require('../controller/test')
-const test_send_sms = require ('../controller/verification-controller')
+// const test_send_sms = require ('../controller/verification-controller')
 
 router.post('/delete-project', deleteProject.deleteProject)
 
@@ -37,6 +37,6 @@ router.post('/alldevelopers', projController.getALLDevelopers)
 
 //test
 router.get('/test-route', test_controller.findUsers)
-router.post('/test-sms', test_send_sms.Verification)
+// router.post('/test-sms', test_send_sms.Verification)
 
 module.exports = router
