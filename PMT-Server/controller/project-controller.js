@@ -1,8 +1,36 @@
 const db = require('../DataBase/db')
+const { create_project_req, update_project_req } = require('../DataBase/requests_on_db/project/projects-req')
 
-module.exports.createProject = async function(req, res){
+module.exports.createProject = async (req, res) => {
+  let Project = {name_project: req.body.name_project, date_start: req.body.date_start, date_end: req.body.date_end, id_creator: req.body.id_creator}
+  try {
+    const result = await create_project_req(Project)
+    result? res.status(200).jsone({messege: 'Created'}) : res.status(500).jsone({messege:'error'})
+  } catch (error) {
+    console.log(error)
+    res.status(500).jsone({messege: 'ERROR'})
+  }
+}
+
+module.exports.updateProject = async (req, res) => {
+  let newData = {name_project: req.body.name_project, date_start: req.body.date_start, date_end: req.body.date_end}
+  try {
+    const result = await update_project_req(newData)
+    result? res.status(200).jsone({messege: 'Successfull Updated', updating: true}) : res.status(500).jsone({messege: 'DB Error', updating: false})
+  } catch (error) {
+    console.log(error)
+    res.status(500).jsone({messege: 'ERROR'})
+  }
+}
+
+module.exports.deleteProject = async (req, res) => {
+  let Project = { id_project: req.body.id_project}
+  
+}
+
+module.exports.createProject1 = async function(req, res){
   let newProject = {name: req.body.name, user:req.body.user, description: req.body.description}
-  try{
+    try{
     db.query(`INSERT INTO "Projects_Table" ("name_project", "owner_project", "description_project") values ($1, $2, $3)`, [newProject.name, newProject.user, newProject.description])
   
 
@@ -11,7 +39,7 @@ module.exports.createProject = async function(req, res){
     }
 }
 
-module.exports.deleteProject = async function(req,res){
+module.exports.deleteProject1 = async function(req,res){
   // DELETE PROJECT AND ALL TASKS OF PROJECT
    let deletedProject = {name: req.body.name, user: req.body.user}
    console.log('------'+ deletedProject.name, deletedProject.user )
