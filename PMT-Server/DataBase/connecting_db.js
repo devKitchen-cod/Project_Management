@@ -359,7 +359,8 @@ module.exports = {
   Spr_Stages: Spr_Stages,
   Spr_Status_Tasks: Spr_Status_Tasks,
   Type_Stages: Type_Stages,
-  Task_Implements: Task_Implements  
+  Task_Implements: Task_Implements,
+  Spr_Projects: Spr_Projects 
 }
 
 

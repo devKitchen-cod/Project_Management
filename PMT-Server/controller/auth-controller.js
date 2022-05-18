@@ -20,12 +20,12 @@ module.exports.createUser = async function(req, res){
                 :
                 (token = null)
         if(token === null){
-          res.status(500).json({message: "Server Error"}) //error of connection server
+          res.status(503).json({message: "Server Error"}) //error of connection server
         }else{
           res.status(200).json({token: token, data_user}) 
         }          
       }
-      else{ res.status(404).json({ message: "User with this email is already exist" })}      
+      else{ res.status(503).json({ message: "User with this email is already exist" })}      
     } catch (err) {
       console.log(err);
     }
@@ -58,9 +58,9 @@ module.exports.createUser = async function(req, res){
     let findUser = await checkEmail(deletedAccount.email)
     if(findUser === true){
        let result = await deleteAccount(deletedUser.email)
-       result? res.status(200).json({message: "Success Deleted!"}) : res.status(500).json({message: "Oops, ERROR"})
+       result? res.status(200).json({message: "Success Deleted!"}) : res.status(503).json({message: "Oops, ERROR"})
     }else{
-      res.status(404).json({message: 'User not found'})
+      res.status(503).json({message: 'User not found'})
     }
   }
   module.exports.updateUser = async (req, res) => {
@@ -68,11 +68,11 @@ module.exports.createUser = async function(req, res){
     let updatedAccount = {name: req.body.name, email: req.body.email, password: req.body.password, id: req.body.id}
     try {  
       let result =  await updateAccount(updatedAccount)
-      result? res.status(200).json({message: 'Success'}):res.status(404).json({message: 'Error'}) 
+      result? res.status(200).json({message: 'Success'}):res.status(503).json({message: 'Error'}) 
     } catch (error) {
       
       console.log(error)
-      res.status(500).json({message: 'Server Error'})
+      res.status(503).json({message: 'Server Error'})
     }
   }
 
@@ -90,8 +90,8 @@ module.exports.createUser = async function(req, res){
       flag? 
       (res.status(200).json({ token: header1, email: email, name: name, password: password}))//, proffetion: proffetion
       :
-      (res.status(404).json({ message: 'User is not found' }))
-    }catch(err){console.log(err), res.status(404).json({ message: 'This user does not exist'})} //,  
+      (res.status(503).json({ message: 'User is not found' }))
+    }catch(err){console.log(err), res.status(503).json({ message: 'This user does not exist'})} //,  
   }
 
  const decodeToken = async function(req,res){

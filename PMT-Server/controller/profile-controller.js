@@ -1,5 +1,4 @@
 
-
 const { adding_extra_data } = require("../DataBase/requests_on_db/auth/auth_req")
 const { get_dev_directions, get_dev_levels } = require("../DataBase/requests_on_db/data_getters/spr_data_getter_req")
 const { create_profile_dev_req, update_profile_dev_req, delete_profile_dev_req, get_all_data_dev_profile } = require("../DataBase/requests_on_db/profiles/create_profile_dev")
@@ -12,7 +11,7 @@ module.exports.get_sub_info_dev = async (data) => {
     let result_directions = await get_dev_directions()
     let result_levels = await get_dev_levels()
     if (result_directions, result_levels === false){
-      res.status(500).jsone({messege: 'Error'})
+      res.status(503).jsone({messege: 'Error'})
     }
     if(result_directions.length == 0){ 
       res.status(200).json({messege: 'Directions are empty'})
@@ -23,7 +22,7 @@ module.exports.get_sub_info_dev = async (data) => {
     }
   } catch (error) {
     console.log(error)
-    res.status(500).json({messege: 'Error'})
+    res.status(503).json({messege: 'Error'})
   }
 }
 
@@ -38,7 +37,7 @@ module.exports.getDevData = async (req, res) => {
     })
   } catch (error) {
     console.log(error)
-    res.status(500).json({messege: 'DB error'})
+    res.status(503).json({messege: 'DB error'})
   } 
 }
 
@@ -62,14 +61,14 @@ module.exports.createDevProfile = async function(req, res) {
     //???
     verify ? 
 
-      result ?  await create_profile_dev_req(DevProfile) : res.status(500).json({messege: 'DB error'})
+      result ?  await create_profile_dev_req(DevProfile) : res.status(503).json({messege: 'DB error'})
       :
-      // res.status(500) 
+      // res.status(503) 
       console.log('Check your verify first')
       
   } catch (error) {
     console.log(error)
-    res.status(500).json({messege: 'ERROR'})
+    res.status(503).json({messege: 'ERROR'})
   }
 }
 module.exports.updateDevProfile = async function(req, res) {
@@ -87,10 +86,10 @@ module.exports.updateDevProfile = async function(req, res) {
     result ? 
       res.status(200).json({messege: 'Success Updated'}) 
         :
-      res.status(500).json({messege: 'DB Error'})
+      res.status(503).json({messege: 'DB Error'})
   } catch (error) {
     console.log(error)
-    res.status(500).json({messege: 'ERROR'})
+    res.status(503).json({messege: 'ERROR'})
   }
 }
 module.exports.deleteDevProfile = async function(req, res) {
@@ -103,10 +102,10 @@ module.exports.deleteDevProfile = async function(req, res) {
     result? 
       res.status(200).json({messege: 'Deleted successful'})
       :
-      res.status(500).json({messege: 'DB Error'})
+      res.status(503).json({messege: 'DB Error'})
   } catch (error) {
     console.log(error)
-    res.status(500).json({messege: 'ERROR'})
+    res.status(503).json({messege: 'ERROR'})
   }
 }
 
@@ -129,14 +128,14 @@ module.exports.createPMprofile = async function(req, res){
     //???
     verify ? 
 
-      result ?  await create_pm_profile(CreatorProfile) : res.status(500).json({messege: 'DB error'})
+      result ?  await create_pm_profile(CreatorProfile) : res.status(503).json({messege: 'DB error'})
       :
-      // res.status(500) 
+      // res.status(503) 
       console.log('Check your verify first')
       
   } catch (error) {
     console.log(error)
-    res.status(500).json({messege: 'ERROR'})
+    res.status(503).json({messege: 'ERROR'})
   }
 }
 module.exports.updatePMprofile = async function(req, res){
@@ -145,7 +144,7 @@ module.exports.updatePMprofile = async function(req, res){
   result ? 
   res.status(200).json({messege: 'Success Updated'}) 
     :
-  res.status(500).json({messege: 'DB Error'})
+  res.status(503).json({messege: 'DB Error'})
 }
 module.exports.deletePMprofile = async function(req, res){
   let deleted_pm_profile = {id_profile: req.body.id_profile}
@@ -153,6 +152,6 @@ module.exports.deletePMprofile = async function(req, res){
   result ? 
   res.status(200).json({messege: 'Success Updated'}) 
     :
-  res.status(500).json({messege: 'DB Error'})
+  res.status(503).json({messege: 'DB Error'})
 }
 

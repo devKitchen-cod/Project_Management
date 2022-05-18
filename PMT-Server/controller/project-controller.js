@@ -1,76 +1,76 @@
-const db = require('../DataBase/db')
-const { create_project_req, update_project_req } = require('../DataBase/requests_on_db/project/projects-req')
+const { create_project_req, update_project_req, delete_project_req, getIdProject, get_all_projects_req, get_one_project_req } = require('../DataBase/requests_on_db/project/projects-crud-req')
 
 module.exports.createProject = async (req, res) => {
-  let Project = {name_project: req.body.name_project, date_start: req.body.date_start, date_end: req.body.date_end, id_creator: req.body.id_creator}
+  let Project = {name_project: req.body.name_project, date_create: req.body.date_create, date_end: req.body.date_end, id_creator: req.body.id_creator}
   try {
-    const result = await create_project_req(Project)
-    result? res.status(200).jsone({messege: 'Created'}) : res.status(500).jsone({messege:'error'})
+    const result = await create_project_req(Project)    
+    console.log('===========',result.dataValues)
+
+    if(result.dataValues === null){
+      res.status(503).jsone({messege:'error'})
+    }else {
+      res.status(200).json({messege: 'Created', result: result.dataValues}) 
+    }
+                                
   } catch (error) {
     console.log(error)
-    res.status(500).jsone({messege: 'ERROR'})
+    res.status(503).json({messege: 'ERROR'})
   }
 }
 
 module.exports.updateProject = async (req, res) => {
-  let newData = {name_project: req.body.name_project, date_start: req.body.date_start, date_end: req.body.date_end}
+  let newData = {name_project: req.body.name_project, date_create: req.body.date_create, date_end: req.body.date_end, id_project: req.body.id_project}
   try {
     const result = await update_project_req(newData)
-    result? res.status(200).jsone({messege: 'Successfull Updated', updating: true}) : res.status(500).jsone({messege: 'DB Error', updating: false})
+    result? res.status(200).jsone({messege: 'Successfull Updated', updating: true}) : res.status(503).jsone({messege: 'DB Error', updating: false})
   } catch (error) {
     console.log(error)
-    res.status(500).jsone({messege: 'ERROR'})
+    res.status(503).jsone({messege: 'ERROR'})
   }
 }
 
 module.exports.deleteProject = async (req, res) => {
   let Project = { id_project: req.body.id_project}
-  
-}
+  try {
+    const result = await delete_project_req(Project)
+    result ? res.status(200).jsone({messege: 'deleted'}) : res.status(503).jsone({messege: 'DB Error'})
+  } catch (error) {
+    console.log(error)
+    res.status(503).jsone({messege: 'Error'})
 
-module.exports.createProject1 = async function(req, res){
-  let newProject = {name: req.body.name, user:req.body.user, description: req.body.description}
-    try{
-    db.query(`INSERT INTO "Projects_Table" ("name_project", "owner_project", "description_project") values ($1, $2, $3)`, [newProject.name, newProject.user, newProject.description])
-  
-
-  }catch (err) {
-      console.log(err);
-    }
-}
-
-module.exports.deleteProject1 = async function(req,res){
-  // DELETE PROJECT AND ALL TASKS OF PROJECT
-   let deletedProject = {name: req.body.name, user: req.body.user}
-   console.log('------'+ deletedProject.name, deletedProject.user )
-   try {
-     db.query(`delete from "Projects_Table" where "name_project" = $1 and "owner_project" = $2 `, [deletedProject.name, deletedProject.user])
-     db.query(`delete from "Tasks_Table" where "project_task"= $1`, [deletedProject.name])
-   } catch (err) {
-     console.log(err)
-   }
-}
-
-
-
-module.exports.trackContrl = async function(req, res){
-  let Tracking = {nameProject:req.body.nameProject, workTime: req.body.workTime}
-    
-  console.log("Work time of project " + Tracking.nameProject + '  ==  ' + Tracking.workTime)
-
-  try{
-    db.query(`UPDATE "Projects_Table" SET "current_time" =  $1 WHERE "name_project"= $2 `, [Tracking.workTime, Tracking.nameProject])
-  
-  }catch (err) {
-    console.log(err);
   }  
 }
 
-module.exports.getDescriptionProject = async function(req, res){
-  let name = {nameproject: req.body.name, owner: req.body.owner}
+module.exports.getAllProjects = async (req, res) => {
+  let Creators_ID = req.body.id_creator
   try {
-    db.query(`select "description_project" from "Projects_Table" where "name_project" = $1 and "owner_project" = $2`, [name.nameproject, name.owner])
+    let result = await get_all_projects_req(Creators_ID)
+    if (result === null){
+      res.status(503).jsone({messege: 'Error'})  
+    }
+    else {
+      res.status(200).json({messege: 'Successfull', result: result})
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(503).jsone({messege: 'Error'})
+  }
+}
+
+module.exports.getOneProject = async (req, res) => {
+  let Project_ID = req.body.id_project
+  try {
+    let result = await get_one_project_req(Project_ID)    
+    if (result === null){
+      res.status(503).jsone({messege: 'Error'})  
+    }
+    else {
+      res.status(200).json({messege: 'Successfull', result: result})
+    }
+    
   } catch (error) {
     console.log(error)
   }
 }
+
+

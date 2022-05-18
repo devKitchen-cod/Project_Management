@@ -10,8 +10,11 @@ const deleteProject = require('../controller/project-controller')
 
 const test_controller = require('../controller/test')
 // const test_send_sms = require ('../controller/verification-controller')
+const create_test = require('../controller/project-controller')
+router.post('/create-project-test', create_test.createProject)
 
 router.post('/delete-project', deleteProject.deleteProject)
+
 
 router.post('/task-read', taskConstroller.readTask)
 router.post('/task-planned', taskConstroller.readTaskPlanned)
