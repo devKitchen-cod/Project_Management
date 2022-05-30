@@ -2,36 +2,33 @@ const jwt = require('jsonwebtoken')
 const keys = require('../keys/key')
 const { createAccount, checkEmail, getDataAccount, deleteAccount, updateAccount } = require('../DataBase/requests_on_db/auth/auth_req')
 
-module.exports.createUser = async function(req, res){
+module.exports.createAccount = async function(req, res){
 
     let newPerson = {name:req.body.name, email: req.body.email, password: req.body.password, role_user: 1}//, proffetion: req.body.proffetion   
     try {
       const check_email = await checkEmail(newPerson.email)    
       if(newPerson.email==='admin@gmail.com'){ newPerson = {name:req.body.name, email: req.body.email, password: req.body.password, role_user: 2}}//, proffetion: req.body.proffetion
       
-      if(check_email === false){ 
-        console.log('Console')       
-        let success_creating = await createAccount(newPerson) // ----req
-
-        let data_user = await getDataAccount(newPerson.email) 
-          console.log('789789',data_user)
-        let token = null 
-        success_creating? (token = jwt.sign({email: newPerson.email, name:newPerson.name, password: newPerson.password}, keys.jwt, {expiresIn: 60 * 60 }))//, proffetion: newPerson.proffetion
-                :
-                (token = null)
-        if(token === null){
-          res.status(503).json({message: "Server Error"}) //error of connection server
-        }else{
-          res.status(200).json({token: token, data_user}) 
+      if(check_email === false){         
+        let result = await createAccount(newPerson) // ----req
+        if (result === false) {
+          res.status(503).json({message: 'error'})
+        } else {
+          let token = jwt.sign({email: newPerson.email, name:newPerson.name, password: newPerson.password}, keys.jwt, {expiresIn: 60 * 60 })
+          res.status(200).json({token: token, result: result}) 
         }          
       }
-      else{ res.status(503).json({ message: "User with this email is already exist" })}      
+      else {
+        res.status(503).json({ message: "User with this email is already exist" })
+      }      
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      res.status(503).json({message: 'error'})
+
     }
   }
 
-  module.exports.loginUser = async function(req, res){
+  module.exports.loginAccount = async function(req, res){
     console.log("login===============")
     let loginPerson = {email: req.body.email, password: req.body.password}
   
@@ -63,7 +60,7 @@ module.exports.createUser = async function(req, res){
       res.status(503).json({message: 'User not found'})
     }
   }
-  module.exports.updateUser = async (req, res) => {
+  module.exports.updateAccount = async (req, res) => {
     console.log('UPDATE === ')
     let updatedAccount = {name: req.body.name, email: req.body.email, password: req.body.password, id: req.body.id}
     try {  

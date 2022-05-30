@@ -22,7 +22,7 @@ try {
   return false
 }
 }
-
+ 
 module.exports.delete_dev_directions = async (data) => {
   try {
     await Spr_Dev_Directions.destroy({

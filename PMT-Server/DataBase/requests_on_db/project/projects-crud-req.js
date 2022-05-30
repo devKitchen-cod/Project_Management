@@ -18,7 +18,7 @@ module.exports.create_project_req = async (data) => {
 
 module.exports.update_project_req = async (data) => {
   try {
-    await Spr_Projects.update({
+    let result = await Spr_Projects.update({
       Name_Project: data.name_project,
       Date_Create: data.date_create,
       Date_End: data.date_end 
@@ -27,10 +27,10 @@ module.exports.update_project_req = async (data) => {
         ID_Project: data.id_project
       }
     })
-    return true
+    return result 
   } catch (error) {
     console.log(error)
-    return false
+    return result
   }
 }
 
@@ -51,16 +51,28 @@ module.exports.delete_project_req = async (data) => {
 
 module.exports.get_all_projects_req = async (data) => {
   try {
-    
+    let result = await Spr_Projects.findAll({
+      where: {
+        ProfileCreatorIDCreatorProfile: data
+      }
+    })
+    return result
   } catch (error) {
     console.log(error)
+    return result
   }
 }
 
 module.exports.get_one_project_req = async (data) => {
   try {
-    
+    let result = await Spr_Projects.findAll({
+      where: {
+        ID_Project: data
+      }
+    })
+    return result
   } catch (error) {
     console.log(error)
+    return result
   }
 }

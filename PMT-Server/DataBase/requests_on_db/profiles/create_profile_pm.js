@@ -8,20 +8,21 @@ const { Profile_Creators } = require("../../connecting_db")
 
 module.exports.create_pm_profile = async (data) => {
   try {
-    await Profile_Creators.create({
+   let result = await Profile_Creators.create({
       Creators_Work_Years: data.creator_work_exp,
       Creators_Description: data.description,
       SprUserIDUser: data.id_profile
     })
+    return result
   } catch (error) {
     console.log(error)
-    return true
+    return false
   }
 }
 
 module.exports.update_pm_profile = async (data) => {
   try {
-    await Profile_Creators.update({
+    let result = await Profile_Creators.update({
       Creators_Work_Years: data.creator_work_exp,
       Creators_Description: data.description,            
     }, {
@@ -29,9 +30,9 @@ module.exports.update_pm_profile = async (data) => {
         ID_Creator_Profile: data.id        
       }
     })
-    return true
+    return result
   } catch (error) {
-    console.log(false)
+    console.log(error)
     return false
   }
 }

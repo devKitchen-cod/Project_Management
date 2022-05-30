@@ -284,7 +284,7 @@ const Spr_Tasks = sequelize.define("Spr_Tasks", {
   timestamps: false
 })
 
-const Type_Stages = sequelize.define('Type_Stages', {
+const Spr_Status_Stages = sequelize.define('Spr_Status_Stages', {
   ID_Type_Stage: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -304,8 +304,8 @@ const Type_Stages = sequelize.define('Type_Stages', {
 
 
 
-Type_Stages.hasMany(Spr_Stages)
-Spr_Stages.belongsTo(Type_Stages)
+Spr_Status_Stages.hasMany(Spr_Stages)
+Spr_Stages.belongsTo(Spr_Status_Stages)
 
 Spr_Tasks.hasMany(Task_Implements)
 Task_Implements.belongsTo(Spr_Tasks)
@@ -358,9 +358,10 @@ module.exports = {
   Spr_Dev_Levels: Spr_Dev_Levels,
   Spr_Stages: Spr_Stages,
   Spr_Status_Tasks: Spr_Status_Tasks,
-  Type_Stages: Type_Stages,
+  Spr_Status_Stages: Spr_Status_Stages,
   Task_Implements: Task_Implements,
-  Spr_Projects: Spr_Projects 
+  Spr_Projects: Spr_Projects,
+  Spr_Tasks: Spr_Tasks 
 }
 
 

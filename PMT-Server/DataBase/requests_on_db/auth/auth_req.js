@@ -2,16 +2,15 @@ const { Spr_Users } = require('../../connecting_db')
 
 module.exports.createAccount = async (data) => {
   try {
-     await Spr_Users.create({
+     let result = await Spr_Users.create({
       name_user: data.name,
       email_user: data.email,
       password_user: data.password,
       role_user: data.role_user,
       is_verify: false
-
      })
     
-    return true
+    return result
   } catch (error) {
     console.log(error)
     return false
@@ -108,7 +107,7 @@ module.exports.getDataAccount = async (data) => {
 
 module.exports.adding_extra_data = async (data) => {
   try {
-    await Spr_Users.update({
+    let result = await Spr_Users.update({
       first_name: data.fname,
       last_name: data.lname,
       date_of_birth: data.date_of_birth,
@@ -118,7 +117,7 @@ module.exports.adding_extra_data = async (data) => {
         ID_User: data.id
       }
     })
-    return true
+    return result 
   } catch (error) {
     console.log(error)
     return false

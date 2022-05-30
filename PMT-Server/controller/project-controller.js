@@ -22,7 +22,12 @@ module.exports.updateProject = async (req, res) => {
   let newData = {name_project: req.body.name_project, date_create: req.body.date_create, date_end: req.body.date_end, id_project: req.body.id_project}
   try {
     const result = await update_project_req(newData)
-    result? res.status(200).jsone({messege: 'Successfull Updated', updating: true}) : res.status(503).jsone({messege: 'DB Error', updating: false})
+    if(result === null){
+      res.status(503).jsone({messege: 'DB Error'})  
+    }
+    else{ 
+      res.status(200).json({messege: 'Successful', result: result})
+    }
   } catch (error) {
     console.log(error)
     res.status(503).jsone({messege: 'ERROR'})
@@ -66,8 +71,7 @@ module.exports.getOneProject = async (req, res) => {
     }
     else {
       res.status(200).json({messege: 'Successfull', result: result})
-    }
-    
+    }    
   } catch (error) {
     console.log(error)
   }

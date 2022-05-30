@@ -1,28 +1,29 @@
-const { Profile_Devs } = require("../../connecting_db")
+const { Profile_Devs, Spr_Dev_Directions, Spr_Dev_Levels } = require("../../connecting_db")
 
 
-//getters for developer profile
-module.exports.get_all_data_dev_profile = async (data) => {
+// //getters for developer profile
+// module.exports.get_all_data_dev_profile = async (data) => {
   
-  try {
-    let result = await Profile_Devs.findAll({
-      where: {
-        ID_Dev_Profile: data.id
-      }
-    })
-    return result
+//   try {
+//     let result = await Profile_Devs.findAll({
+//       where: {
+//         ID_Dev_Profile: data.id
+//       }
+//     })
+
+//     return result
     
-  } catch (error) {
-    console.log(error)
-  }
-}
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 
 //CRUD for developer profile
 module.exports.create_profile_dev_req = async (data) => {
   try {
     //insert into Profile_Devs
-    await Profile_Devs.create({
+   let result = await Profile_Devs.create({
       Dev_Work_Years: data.workexp,
       Dev_Description: data.description,
       Dev_Technology_Stack: data.techs,
@@ -31,7 +32,7 @@ module.exports.create_profile_dev_req = async (data) => {
       SprUserIDUser: data.id
     })
 
-    return true
+    return result 
   } catch (error) {
     console.log(error)
     return false
@@ -40,7 +41,7 @@ module.exports.create_profile_dev_req = async (data) => {
 
 module.exports.update_profile_dev_req = async (data) => {
   try {
-    await Profile_Devs.update({      
+   let result = await Profile_Devs.update({      
       Dev_Work_Years: data.new_workexp,
       Dev_Description: data.new_description,
       Dev_Technology_Stack: new_data.techs,
@@ -51,7 +52,7 @@ module.exports.update_profile_dev_req = async (data) => {
         ID_Dev_Profile: data.id_profile
       }
     })
-    return true
+    return result
   } catch (error) {
     console.log(error)
     return false
@@ -66,6 +67,26 @@ module.exports.delete_profile_dev_req = async (data) => {
       }
     })
     return true
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+module.exports.get_directions_dev = async (data) => {
+  try {
+    let result = await Spr_Dev_Directions.findAll()
+    return result
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+module.exports.get_levels_dev = async (data) => {
+  try {
+    let result = await Spr_Dev_Levels.findAll()
+    return result
   } catch (error) {
     console.log(error)
     return false
