@@ -21,11 +21,7 @@ module.exports.createUser = async function(req, res){
       console.log(err);
     }
   }
-<<<<<<< HEAD
-  ada
-=======
   
->>>>>>> last_commits
   const VerifyEmail = async (req, res) => {
     const result = req 
     let checked_email =await (db.query(`SELECT email_user FROM "Users_Table" WHERE email_user = $1;`, [result]));
@@ -38,7 +34,8 @@ module.exports.createUser = async function(req, res){
       const header1 = await req.headers['authorization']      
       const decoded_Token = await decodeToken(header1,res)
       const user ={email:decoded_Token.email, name: decoded_Token.name, password:decoded_Token.password, proffetion:decoded_Token.proffetion}      
-      const email = user.email
+      const email = user.
+      email
       const name = user.name
       const password = user.password
       const proffetion = user.proffetion

@@ -27,7 +27,7 @@ module.exports.loginUser = async function(req, res){
 const VerifyEmail = async (req, res) => {
   const result = req 
   console.log(result)
-  let checked_email =await (db.query(`SELECT email_user FROM "Users_Table" WHERE email_user = $1;`, [result]));
+  let checked_email = await (db.query(`SELECT email_user FROM "Users_Table" WHERE email_user = $1;`, [result]));
   if((await checked_email).rowCount === 0) {return false}
   return true
 }
